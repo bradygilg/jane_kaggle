@@ -1,2 +1,4 @@
 # jane_kaggle
-Jane Street Kaggle competition
+A simple DVC structure for the Jane Street Kaggle competition.
+
+## Installation

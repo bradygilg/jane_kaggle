@@ -18,7 +18,9 @@ dependencies = [
     "jupyter",
     "fsspec",
     "ipykernel",
-    "kaggle"
+    "kaggle",
+    "pyarrow",
+    "matplotlib"
 ]
 
 [project.urls]
@@ -28,5 +30,5 @@ dependencies = [
 requires = ["setuptools", "setuptools_scm[toml]", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tools.setuptools]
+[tool.setuptools]
 packages = ["src"]

@@ -8,3 +8,5 @@ jupyter
 fsspec
 ipykernel
 kaggle
+pyarrow
+matplotlib

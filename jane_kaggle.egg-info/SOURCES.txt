@@ -1,5 +1,15 @@
+.dvcignore
+.gitignore
 README.md
+frozen_requirements.txt
 pyproject.toml
+requirements.txt
+.dvc/.gitignore
+.dvc/config
+Data/.gitignore
+Pipeline_Yamls/dvc.lock
+Pipeline_Yamls/dvc.yaml
+Pipeline_Yamls/params.yaml
 jane_kaggle.egg-info/PKG-INFO
 jane_kaggle.egg-info/SOURCES.txt
 jane_kaggle.egg-info/dependency_links.txt
