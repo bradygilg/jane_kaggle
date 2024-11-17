@@ -1,4 +1,0 @@
-## Root is the relative path from this yaml file to the root of the git repo.
-## Project name is an optional name that is inserted into saved output files. This is useful if you want to have multiple dvc yamls in the same repo.
-root: '..'
-projec_name: '.'

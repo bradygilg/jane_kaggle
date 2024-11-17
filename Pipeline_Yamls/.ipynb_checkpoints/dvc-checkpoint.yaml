@@ -1,5 +1,0 @@
-stages:
-    kaggle_download:
-        cmd: kaggle competitions download -c jane-street-real-time-market-data-forecasting -p ${root}/Data/Raw && unzip ${root}/Data/Raw/jane-street-real-time-market-data-forecasting.zip -d ${root}/Data/Raw && rm ${root}/Data/Raw/jane-street-real-time-market-data-forecasting.zip
-        outs:
-            - ${root}/Data/Raw/
