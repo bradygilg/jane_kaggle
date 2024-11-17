@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+jane_kaggle.egg-info/PKG-INFO
+jane_kaggle.egg-info/SOURCES.txt
+jane_kaggle.egg-info/dependency_links.txt
+jane_kaggle.egg-info/requires.txt
+jane_kaggle.egg-info/top_level.txt

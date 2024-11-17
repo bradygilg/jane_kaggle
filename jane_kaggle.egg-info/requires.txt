@@ -1,0 +1,10 @@
+numpy
+pandas
+pretty_errors
+scikit-learn
+tqdm
+dvc>=3.0
+jupyter
+fsspec
+ipykernel
+kaggle

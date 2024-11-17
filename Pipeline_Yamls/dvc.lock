@@ -1,0 +1,12 @@
+schema: '2.0'
+stages:
+  kaggle_download:
+    cmd: kaggle competitions download -c jane-street-real-time-market-data-forecasting
+      -p ../Data/Raw && unzip ../Data/Raw/jane-street-real-time-market-data-forecasting.zip
+      -d ../Data/Raw && rm ../Data/Raw/jane-street-real-time-market-data-forecasting.zip
+    outs:
+    - path: ../Data/Raw/
+      hash: md5
+      md5: 97fe5554c3c4771ea5118c1824dd143b.dir
+      size: 12299793517
+      nfiles: 26

@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: jane_kaggle
+Version: 0.0.0
+Summary: Jane Street Kaggle competition
+License: Brady Gilg
+Project-URL: Homepage, https://github.com/bradygilg/jane_kaggle
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: pretty_errors
+Requires-Dist: scikit-learn
+Requires-Dist: tqdm
+Requires-Dist: dvc>=3.0
+Requires-Dist: jupyter
+Requires-Dist: fsspec
+Requires-Dist: ipykernel
+Requires-Dist: kaggle
+
+# jane_kaggle
+Jane Street Kaggle competition

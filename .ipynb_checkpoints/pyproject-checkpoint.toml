@@ -1,0 +1,32 @@
+# Template from https://github.com/pypa/sampleproject/blob/main/pyproject.toml
+# This file can be converted to a requirements.txt file with
+# pip-compile -v -o requirements.txt pyproject.toml
+[project]
+name = "jane_kaggle"
+description = "Jane Street Kaggle competition"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "Brady Gilg"}
+dynamic = ["version"]
+dependencies = [
+    "numpy",
+    "pandas",
+    "pretty_errors",
+    "scikit-learn",
+    "tqdm",
+    "dvc>=3.0",
+    "jupyter",
+    "fsspec",
+    "ipykernel",
+    "kaggle"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/bradygilg/jane_kaggle"
+
+[build-system]
+requires = ["setuptools", "setuptools_scm[toml]", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tools.setuptools]
+packages = ["src"]
