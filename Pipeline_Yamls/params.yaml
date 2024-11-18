@@ -6,19 +6,23 @@ project_name: '.'
 ## Pipeline parameters determine which methods are used in each stage.
 pipeline:
     processor_list: ['Regressionalize']
-    model_list: ['LinearRegression', 'PytorchNeuralNetwork', 'PytorchNeuralNetworkRestricted']
-    metric_list: ['MSEloss', 'PearsonScatter', 'SpearmanScatter']
+    # model_list: ['LinearRegressor', 'PytorchNeuralNetwork', 'PytorchNeuralNetworkRestricted']
+    model_list: ['LinearRegressor']
+    # metric_list: ['MSEloss', 'PearsonScatter', 'SpearmanScatter']
+    metric_list: ['Scatter']
 
 parameters:
     processors:
         global:
+            fold_column: 'date_id'
+            num_folds: 5
+            partition_ids: [0]
+            label_column: 'responder_6'
         Regressionalize: {}
     models:
-        LinearRegression: {}
+        LinearRegressor: {}
         PytorchNeuralNetwork: {}
         PytorchNeuralNetworkRestricted: {}
     metrics:
         MSEloss: {}
-        PearsonScatter: {}
-        SpearmanScatter: {}
-        
+        Scatter: {}        

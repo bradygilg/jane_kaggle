@@ -10,3 +10,95 @@ stages:
       md5: 97fe5554c3c4771ea5118c1824dd143b.dir
       size: 12299793517
       nfiles: 26
+  preprocess_dataframe@Regressionalize:
+    cmd: python ../Scripts/Processors/Regressionalize.py --input ../Data/Raw/ --output
+      ../Data/Processed/./Regressionalize.parquet
+    deps:
+    - path: ../Data/Raw/
+      hash: md5
+      md5: 97fe5554c3c4771ea5118c1824dd143b.dir
+      size: 12299793517
+      nfiles: 26
+    - path: ../Scripts/Processors/Regressionalize.py
+      hash: md5
+      md5: 7816ab821f97689b2124fb6c0a46c17d
+      size: 2406
+    params:
+      params.yaml:
+        parameters.processors.Regressionalize: {}
+        parameters.processors.global:
+          fold_column: date_id
+          num_folds: 5
+          partition_ids:
+          - 0
+          label_column: responder_6
+    outs:
+    - path: ../Data/Processed/./Regressionalize.parquet
+      hash: md5
+      md5: 7ac4c3ed612d1bd4abbb46991b815860
+      size: 598771655
+  train@Regressionalize-LinearRegressor:
+    cmd: python ../Scripts/Model_Train/LinearRegressor.py --input ../Data/Processed/./Regressionalize.parquet
+      --output ../Models/./Regressionalize/LinearRegressor
+    deps:
+    - path: ../Data/Raw/
+      hash: md5
+      md5: 97fe5554c3c4771ea5118c1824dd143b.dir
+      size: 12299793517
+      nfiles: 26
+    - path: ../Scripts/Model_Train/LinearRegressor.py
+      hash: md5
+      md5: 14ed19c77a527389a81e1082fed59b54
+      size: 1167
+    params:
+      params.yaml:
+        parameters.models.LinearRegressor: {}
+    outs:
+    - path: ../Models/./Regressionalize/LinearRegressor
+      hash: md5
+      md5: f8fa2c5f585be7f990b51489ff3fa2f7.dir
+      size: 101112795
+      nfiles: 15
+  test@Regressionalize-LinearRegressor:
+    cmd: python ../Scripts/Model_Test/LinearRegressor.py --model ../Models/./Regressionalize/LinearRegressor
+      --input ../Data/Processed/./Regressionalize.parquet --output ../Data/Processed/Predictions/./Regressionalize/LinearRegressor.parquet
+    deps:
+    - path: ../Data/Processed/./Regressionalize.parquet
+      hash: md5
+      md5: 7ac4c3ed612d1bd4abbb46991b815860
+      size: 598771655
+    - path: ../Models/./Regressionalize/LinearRegressor
+      hash: md5
+      md5: f8fa2c5f585be7f990b51489ff3fa2f7.dir
+      size: 101112795
+      nfiles: 15
+    - path: ../Scripts/Model_Test/LinearRegressor.py
+      hash: md5
+      md5: d71a16d6af92589f2ae69707db9e0876
+      size: 1370
+    outs:
+    - path: ../Data/Processed/Predictions/./Regressionalize/LinearRegressor.parquet
+      hash: md5
+      md5: 60756b7856f16d7821730624ddd6981f
+      size: 18452659
+  metrics@Regressionalize-LinearRegressor-Scatter:
+    cmd: python ../Scripts/Metrics/Scatter.py --input ../Data/Processed/Predictions/./Regressionalize/LinearRegressor.parquet
+      --output ../Figures/./Regressionalize/LinearRegressor/Scatter
+    deps:
+    - path: ../Data/Processed/Predictions/./Regressionalize/LinearRegressor.parquet
+      hash: md5
+      md5: 60756b7856f16d7821730624ddd6981f
+      size: 18452659
+    - path: ../Scripts/Metrics/Scatter.py
+      hash: md5
+      md5: e6584162bf0f317bc4fb98800a0a3232
+      size: 1228
+    params:
+      params.yaml:
+        parameters.metrics.Scatter: {}
+    outs:
+    - path: ../Figures/./Regressionalize/LinearRegressor/Scatter
+      hash: md5
+      md5: b77451638d29dfa4f637b9ed8205b3e0.dir
+      size: 71420
+      nfiles: 1
