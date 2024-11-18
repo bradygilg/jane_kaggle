@@ -68,7 +68,7 @@ stages:
             - ${root}/Scripts/Metrics/${item.metric}.py 
             - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}.parquet
         plots:
-            - ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}
-            cache: False
+            - ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}:
+                cache: False
         params:
             - parameters.metrics.${item.metric}
