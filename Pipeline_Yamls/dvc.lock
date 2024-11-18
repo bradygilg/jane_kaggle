@@ -41,11 +41,10 @@ stages:
     cmd: python ../Scripts/Model_Train/LinearRegressor.py --input ../Data/Processed/./Regressionalize.parquet
       --output ../Models/./Regressionalize/LinearRegressor
     deps:
-    - path: ../Data/Raw/
+    - path: ../Data/Processed/./Regressionalize.parquet
       hash: md5
-      md5: 97fe5554c3c4771ea5118c1824dd143b.dir
-      size: 12299793517
-      nfiles: 26
+      md5: 7ac4c3ed612d1bd4abbb46991b815860
+      size: 598771655
     - path: ../Scripts/Model_Train/LinearRegressor.py
       hash: md5
       md5: 14ed19c77a527389a81e1082fed59b54
@@ -109,11 +108,10 @@ stages:
     cmd: python ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py --input ../Data/Processed/./Regressionalize.parquet
       --output ../Models/./Regressionalize/PytorchNeuralNetworkRegressor
     deps:
-    - path: ../Data/Raw/
+    - path: ../Data/Processed/./Regressionalize.parquet
       hash: md5
-      md5: 97fe5554c3c4771ea5118c1824dd143b.dir
-      size: 12299793517
-      nfiles: 26
+      md5: 7ac4c3ed612d1bd4abbb46991b815860
+      size: 598771655
     - path: ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py
       hash: md5
       md5: 45e25ed050c91e3b61ebde66fbf85d48

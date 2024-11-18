@@ -62,7 +62,7 @@ fqdn==1.5.1
 frozenlist==1.5.0
 fsspec==2024.10.0
 funcy==2.0
-gilg_utils @ git+https://github.com/bradygilg/gilg_utilities.git@c09392d4bb132b3897f0cafe6bf2d0a8c60de675
+gilg_utils @ git+https://github.com/bradygilg/gilg_utilities.git@a46b20989f28b67af48b7661f7d79d2518f18074
 gitdb==4.0.11
 GitPython==3.1.43
 grandalf==0.8

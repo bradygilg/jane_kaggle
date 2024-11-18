@@ -21,7 +21,7 @@ dependencies = [
     "kaggle",
     "pyarrow",
     "matplotlib",
-    "gilg_utils[all] @ git+https://github.com/bradygilg/gilg_utilities.git"
+    "gilg_utils[all] @ git+https://github.com/bradygilg/gilg_utilities.git@1.0.0"
 ]
 
 [project.urls]

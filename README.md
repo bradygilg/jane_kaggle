@@ -47,10 +47,10 @@ flowchart TD
 	node7["Pipeline_Yamls/dvc.yaml:train@Regressionalize-LinearRegressor"]
 	node8["Pipeline_Yamls/dvc.yaml:train@Regressionalize-PytorchNeuralNetworkRegressor"]
 	node1-->node4
-	node1-->node7
-	node1-->node8
 	node4-->node5
 	node4-->node6
+	node4-->node7
+	node4-->node8
 	node5-->node2
 	node6-->node3
 	node7-->node5

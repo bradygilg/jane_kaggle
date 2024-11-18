@@ -33,7 +33,7 @@ stages:
              --output ${root}/Models/${project_name}/${item.processor}/${item.model}
         deps:
             - ${root}/Scripts/Model_Train/${item.model}.py
-            - ${root}/Data/Raw/
+            - ${root}/Data/Processed/${project_name}/${item.processor}.parquet 
         outs:
             - ${root}/Models/${project_name}/${item.processor}/${item.model}
         params:
@@ -51,7 +51,7 @@ stages:
         deps:
             - ${root}/Scripts/Model_Test/${item.model}.py 
             - ${root}/Models/${project_name}/${item.processor}/${item.model}
-            - ${root}/Data/Processed/${project_name}/${item.processor}.parquet 
+            - ${root}/Data/Processed/${project_name}/${item.processor}.parquet
         outs:
             - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}.parquet
         
