@@ -1,5 +1,74 @@
 stages:
+    # This download requires a Kaggle account and an authentication JSON. See https://www.kaggle.com/docs/api
+    # Approximately 12 GB
     kaggle_download:
         cmd: kaggle competitions download -c jane-street-real-time-market-data-forecasting -p ${root}/Data/Raw && unzip ${root}/Data/Raw/jane-street-real-time-market-data-forecasting.zip -d ${root}/Data/Raw && rm ${root}/Data/Raw/jane-street-real-time-market-data-forecasting.zip
         outs:
             - ${root}/Data/Raw/
+
+    # The purpose of this step is to reformat the time-series into a standard regression style format suitable for benchmarking.
+    # Also assigns cross-fold buckets and column index categories.
+    preprocess_dataframe:
+        matrix:
+            processor: ${pipeline.processor_list}
+        cmd: python ${root}/Scripts/Processors/${item.processor}.py 
+             --input ${root}/Data/Raw/ 
+             --output ${root}/Data/Processed/${project_name}/${item.processor}.parquet
+        deps:
+            - ${root}/Scripts/Processors/${item.processor}.py
+            - ${root}/Data/Raw/
+        outs:
+            - ${root}/Data/Processed/${project_name}/${item.processor}.parquet
+        params:
+            - parameters.processors.global
+            - parameters.processors.${item.processor}
+
+    # Train a model for each fold and save them in the output directory
+    train:
+        matrix:
+            processor: ${pipeline.processor_list}
+            model: ${pipeline.model_list}
+        cmd: python ${root}/Scripts/Model_Train/${item.model}.py 
+             --input ${root}/Data/Processed/${project_name}/${item.processor}.parquet 
+             --output ${root}/Models/${project_name}/${item.processor}/${item.model}
+        deps:
+            - ${root}/Scripts/Model_Train/${item.model}.py
+            - ${root}/Data/Raw/
+        outs:
+            - ${root}/Models/${project_name}/${item.processor}/${item.model}
+        params:
+            - parameters.models.${item.model}
+
+    # Save the predicted outputs on each fold.
+    test:
+        matrix:
+            processor: ${pipeline.processor_list}
+            model: ${pipeline.model_list}
+        cmd: python ${root}/Scripts/Model_Test/${item.model}.py 
+             --model ${root}/Models/${project_name}/${item.processor}/${item.model}
+             --input ${root}/Data/Processed/${project_name}/${item.processor}.parquet 
+             --output ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}.parquet
+        deps:
+            - ${root}/Scripts/Model_Test/${item.model}.py 
+            - ${root}/Models/${project_name}/${item.processor}/${item.model}
+            - ${root}/Data/Processed/${project_name}/${item.processor}.parquet 
+        outs:
+            - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}.parquet
+        
+    # Generate any figures of interest.
+    metrics:
+        matrix:
+            processor: ${pipeline.processor_list}
+            model: ${pipeline.model_list}
+            metric: ${pipeline.metric_list}
+        cmd: python ${root}/Scripts/Metrics/${item.metric}.py 
+             --input ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}.parquet
+             --output ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}
+        deps:
+            - ${root}/Scripts/Metrics/${item.metric}.py 
+            - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}.parquet
+        plots:
+            - ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}
+            cache: False
+        params:
+            - parameters.metrics.${item.metric}
