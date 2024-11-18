@@ -91,14 +91,97 @@ stages:
       size: 18452659
     - path: ../Scripts/Metrics/Scatter.py
       hash: md5
-      md5: e6584162bf0f317bc4fb98800a0a3232
-      size: 1228
+      md5: e5a619dddfe635e37853649dfdc04de3
+      size: 1794
     params:
       params.yaml:
-        parameters.metrics.Scatter: {}
+        parameters.metrics.Scatter:
+          figsize: 8
+          alpha: 0.1
+          point_size: 5
     outs:
     - path: ../Figures/./Regressionalize/LinearRegressor/Scatter
       hash: md5
-      md5: b77451638d29dfa4f637b9ed8205b3e0.dir
-      size: 71420
+      md5: 9eff701451e5a6ccd61e67c269f4ec7f.dir
+      size: 94561
+      nfiles: 1
+  train@Regressionalize-PytorchNeuralNetworkRegressor:
+    cmd: python ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py --input ../Data/Processed/./Regressionalize.parquet
+      --output ../Models/./Regressionalize/PytorchNeuralNetworkRegressor
+    deps:
+    - path: ../Data/Raw/
+      hash: md5
+      md5: 97fe5554c3c4771ea5118c1824dd143b.dir
+      size: 12299793517
+      nfiles: 26
+    - path: ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py
+      hash: md5
+      md5: 45e25ed050c91e3b61ebde66fbf85d48
+      size: 2102
+    params:
+      params.yaml:
+        parameters.models.PytorchNeuralNetworkRegressor:
+          dimension: 16
+          learning_rate: 0.01
+          dropout_rate: 0.1
+          loss_function_name: MSELoss
+          optimizer_name: SGD
+          max_epochs: 20
+          seed: 363
+          callback_period: 5
+    outs:
+    - path: ../Models/./Regressionalize/PytorchNeuralNetworkRegressor
+      hash: md5
+      md5: a210e4d0e68c057bceb879cc631b5185.dir
+      size: 101156890
+      nfiles: 20
+  test@Regressionalize-PytorchNeuralNetworkRegressor:
+    cmd: python ../Scripts/Model_Test/PytorchNeuralNetworkRegressor.py --model ../Models/./Regressionalize/PytorchNeuralNetworkRegressor
+      --input ../Data/Processed/./Regressionalize.parquet --output 
+      ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor.parquet
+    deps:
+    - path: ../Data/Processed/./Regressionalize.parquet
+      hash: md5
+      md5: 7ac4c3ed612d1bd4abbb46991b815860
+      size: 598771655
+    - path: ../Models/./Regressionalize/PytorchNeuralNetworkRegressor
+      hash: md5
+      md5: a210e4d0e68c057bceb879cc631b5185.dir
+      size: 101156890
+      nfiles: 20
+    - path: ../Scripts/Model_Test/PytorchNeuralNetworkRegressor.py
+      hash: md5
+      md5: 97fa587c90960467cbd9da2e3972b86d
+      size: 1412
+    outs:
+    - path: 
+        ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor.parquet
+      hash: md5
+      md5: 25b53d8fef0e5dd590c7e44faf25f4db
+      size: 18450287
+  metrics@Regressionalize-PytorchNeuralNetworkRegressor-Scatter:
+    cmd: python ../Scripts/Metrics/Scatter.py --input 
+      ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor.parquet
+      --output ../Figures/./Regressionalize/PytorchNeuralNetworkRegressor/Scatter
+    deps:
+    - path: 
+        ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor.parquet
+      hash: md5
+      md5: 25b53d8fef0e5dd590c7e44faf25f4db
+      size: 18450287
+    - path: ../Scripts/Metrics/Scatter.py
+      hash: md5
+      md5: e5a619dddfe635e37853649dfdc04de3
+      size: 1794
+    params:
+      params.yaml:
+        parameters.metrics.Scatter:
+          figsize: 8
+          alpha: 0.1
+          point_size: 5
+    outs:
+    - path: ../Figures/./Regressionalize/PytorchNeuralNetworkRegressor/Scatter
+      hash: md5
+      md5: 3ff1a5eed55a9e7fe2b1f54c2249128d.dir
+      size: 147396
       nfiles: 1
