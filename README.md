@@ -34,7 +34,7 @@ This repro does not have saved checkpoints available in a remote, so `dvc pull` 
 
 ## Structure
 
-This project is managed by a [pipeline file](https://github.com/bradygilg/jane_kaggle/blob/main/Pipeline_Yamls/dvc.yaml) that runs [individual scripts](https://github.com/bradygilg/jane_kaggle/blob/main/Pipeline_Yamls/dvc.yaml) according to a [parameters file](https://github.com/bradygilg/jane_kaggle/blob/main/Pipeline_Yamls/params.yaml). 
+This project is managed by a [pipeline file](https://github.com/bradygilg/jane_kaggle/blob/main/Pipeline_Yamls/dvc.yaml) that runs [individual scripts](https://github.com/bradygilg/jane_kaggle/blob/main/Scripts) according to a [parameters file](https://github.com/bradygilg/jane_kaggle/blob/main/Pipeline_Yamls/params.yaml). 
 
 The final performance metrics on cross-fold test data are available in [Figures](https://github.com/bradygilg/jane_kaggle/blob/main/Figures).
 
