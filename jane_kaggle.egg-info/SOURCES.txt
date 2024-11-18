@@ -9,13 +9,16 @@ requirements.txt
 Data/.gitignore
 Data/Processed/Predictions/Regressionalize/.gitignore
 Figures/Regressionalize/LinearRegressor/Scatter/scatter.png
+Figures/Regressionalize/PytorchNeuralNetworkRegressor/Scatter/scatter.png
 Notebooks/exploration.ipynb
 Pipeline_Yamls/dvc.lock
 Pipeline_Yamls/dvc.yaml
 Pipeline_Yamls/params.yaml
 Scripts/Metrics/Scatter.py
 Scripts/Model_Test/LinearRegressor.py
+Scripts/Model_Test/PytorchNeuralNetworkRegressor.py
 Scripts/Model_Train/LinearRegressor.py
+Scripts/Model_Train/PytorchNeuralNetworkRegressor.py
 Scripts/Processors/Regressionalize.py
 jane_kaggle.egg-info/PKG-INFO
 jane_kaggle.egg-info/SOURCES.txt
