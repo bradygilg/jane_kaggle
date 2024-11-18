@@ -40,12 +40,19 @@ The final performance metrics on cross-fold test data are available in [Figures]
 flowchart TD
 	node1["Pipeline_Yamls/dvc.yaml:kaggle_download"]
 	node2["Pipeline_Yamls/dvc.yaml:metrics@Regressionalize-LinearRegressor-Scatter"]
-	node3["Pipeline_Yamls/dvc.yaml:preprocess_dataframe@Regressionalize"]
-	node4["Pipeline_Yamls/dvc.yaml:test@Regressionalize-LinearRegressor"]
-	node5["Pipeline_Yamls/dvc.yaml:train@Regressionalize-LinearRegressor"]
-	node1-->node3
-	node1-->node5
-	node3-->node4
-	node4-->node2
-	node5-->node4
+	node3["Pipeline_Yamls/dvc.yaml:metrics@Regressionalize-PytorchNeuralNetworkRegressor-Scatter"]
+	node4["Pipeline_Yamls/dvc.yaml:preprocess_dataframe@Regressionalize"]
+	node5["Pipeline_Yamls/dvc.yaml:test@Regressionalize-LinearRegressor"]
+	node6["Pipeline_Yamls/dvc.yaml:test@Regressionalize-PytorchNeuralNetworkRegressor"]
+	node7["Pipeline_Yamls/dvc.yaml:train@Regressionalize-LinearRegressor"]
+	node8["Pipeline_Yamls/dvc.yaml:train@Regressionalize-PytorchNeuralNetworkRegressor"]
+	node1-->node4
+	node1-->node7
+	node1-->node8
+	node4-->node5
+	node4-->node6
+	node5-->node2
+	node6-->node3
+	node7-->node5
+	node8-->node6
 ```
