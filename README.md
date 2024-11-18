@@ -17,7 +17,9 @@ An explicit pip environment is provided in frozen_requirements.txt. To install, 
 A pyproject.toml is also provided if modifications to the environment are required. To regenerate the requirements using [pip-tools](https://github.com/jazzband/pip-tools), run
 
 `pip install pip-tools`
+
 `pip-compile -v -o requirements.txt pyproject.toml`
+
 `pip install -r requirements.txt`
 
 ## Usage
