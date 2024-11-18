@@ -20,7 +20,8 @@ dependencies = [
     "ipykernel",
     "kaggle",
     "pyarrow",
-    "matplotlib"
+    "matplotlib",
+    "gilg_utils[all] @ git+https://github.com/bradygilg/gilg_utilities.git"
 ]
 
 [project.urls]

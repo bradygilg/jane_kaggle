@@ -33,8 +33,9 @@ def main():
     # Save figure
     plt.figure(figsize=(8,8))
     plt.scatter(input_df[('Predictions','Prediction')],input_df[('Label',label_column)],alpha=0.1,s=5)
-    plt.xlabel(f'Predicted {label_column}')
-    plt.ylabel(f'True {label_column}')
+    plt.xlabel(f'Predicted {label_column}',fontsize=20)
+    plt.ylabel(f'True {label_column}',fontsize=20)
+    plt.title('Model Performance',fontsize=25)
     out_filename = path.join(args.output,'scatter.png')
     plt.savefig(out_filename)
 

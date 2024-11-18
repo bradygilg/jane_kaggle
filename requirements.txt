@@ -64,6 +64,8 @@ bleach==6.2.0
     # via
     #   kaggle
     #   nbconvert
+build==1.2.2.post1
+    # via pip-tools
 celery==5.4.0
     # via
     #   dvc
@@ -87,6 +89,7 @@ click==8.1.7
     #   click-didyoumean
     #   click-plugins
     #   click-repl
+    #   pip-tools
     #   typer
 click-didyoumean==0.3.1
     # via celery
@@ -153,6 +156,7 @@ exceptiongroup==1.2.2
     # via
     #   anyio
     #   ipython
+    #   pytest
 executing==2.1.0
     # via stack-data
 fastjsonschema==2.20.0
@@ -187,6 +191,8 @@ funcy==2.0
     #   dvc-task
     #   gto
     #   scmrepo
+gilg-utils[all,dev,pytorch,test] @ git+https://github.com/bradygilg/gilg_utilities.git
+    # via jane_kaggle (pyproject.toml)
 gitdb==4.0.11
     # via gitpython
 gitpython==3.1.43
@@ -210,6 +216,8 @@ idna==3.10
     #   jsonschema
     #   requests
     #   yarl
+iniconfig==2.0.0
+    # via pytest
 ipykernel==6.29.5
     # via
     #   jane_kaggle (pyproject.toml)
@@ -249,7 +257,9 @@ jsonschema[format-nongpl]==4.23.0
 jsonschema-specifications==2024.10.1
     # via jsonschema
 jupyter==1.1.1
-    # via jane_kaggle (pyproject.toml)
+    # via
+    #   gilg-utils
+    #   jane_kaggle (pyproject.toml)
 jupyter-client==8.6.3
     # via
     #   ipykernel
@@ -346,6 +356,7 @@ notebook-shim==0.2.4
 numpy==2.1.3
     # via
     #   contourpy
+    #   gilg-utils
     #   jane_kaggle (pyproject.toml)
     #   matplotlib
     #   pandas
@@ -363,6 +374,7 @@ overrides==7.7.0
     # via jupyter-server
 packaging==24.2
     # via
+    #   build
     #   dvc
     #   hydra-core
     #   ipykernel
@@ -371,8 +383,11 @@ packaging==24.2
     #   jupyterlab-server
     #   matplotlib
     #   nbconvert
+    #   pytest
 pandas==2.2.3
-    # via jane_kaggle (pyproject.toml)
+    # via
+    #   gilg-utils
+    #   jane_kaggle (pyproject.toml)
 pandocfilters==1.5.1
     # via nbconvert
 parso==0.8.4
@@ -385,10 +400,14 @@ pexpect==4.9.0
     # via ipython
 pillow==11.0.0
     # via matplotlib
+pip-tools==7.4.1
+    # via gilg-utils
 platformdirs==3.11.0
     # via
     #   dvc
     #   jupyter-core
+pluggy==1.5.0
+    # via pytest
 pretty-errors==1.2.25
     # via jane_kaggle (pyproject.toml)
 prometheus-client==0.21.0
@@ -443,6 +462,12 @@ pyparsing==3.2.0
     #   grandalf
     #   matplotlib
     #   pydot
+pyproject-hooks==1.2.0
+    # via
+    #   build
+    #   pip-tools
+pytest==8.3.3
+    # via gilg-utils
 python-dateutil==2.9.0.post0
     # via
     #   arrow
@@ -503,7 +528,9 @@ ruamel-yaml==0.18.6
 ruamel-yaml-clib==0.2.12
     # via ruamel-yaml
 scikit-learn==1.5.2
-    # via jane_kaggle (pyproject.toml)
+    # via
+    #   gilg-utils
+    #   jane_kaggle (pyproject.toml)
 scipy==1.14.1
     # via scikit-learn
 scmrepo==3.3.8
@@ -556,7 +583,11 @@ threadpoolctl==3.5.0
 tinycss2==1.4.0
     # via nbconvert
 tomli==2.1.0
-    # via jupyterlab
+    # via
+    #   build
+    #   jupyterlab
+    #   pip-tools
+    #   pytest
 tomlkit==0.13.2
     # via dvc
 tornado==6.4.1
@@ -637,6 +668,8 @@ webencodings==0.5.1
     #   tinycss2
 websocket-client==1.8.0
     # via jupyter-server
+wheel==0.45.0
+    # via pip-tools
 widgetsnbextension==4.0.13
     # via ipywidgets
 yarl==1.17.1
@@ -645,4 +678,5 @@ zc-lockfile==3.0.post1
     # via dvc
 
 # The following packages are considered to be unsafe in a requirements file:
+# pip
 # setuptools

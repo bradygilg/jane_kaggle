@@ -18,6 +18,7 @@ Requires-Dist: ipykernel
 Requires-Dist: kaggle
 Requires-Dist: pyarrow
 Requires-Dist: matplotlib
+Requires-Dist: gilg_utils[all]@ git+https://github.com/bradygilg/gilg_utilities.git
 
 # jane_kaggle
 A simple DVC structure for the Jane Street Kaggle competition.
