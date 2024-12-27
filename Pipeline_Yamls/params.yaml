@@ -8,7 +8,7 @@ pipeline:
     # processor_list: ['Regressionalize', 'Lag']
     processor_list: ['Lag']
     model_list: ['LinearRegressor', 'PytorchNeuralNetworkRegressor']
-    metric_list: ['Scatter']
+    metric_list: ['Scatter', 'Weighted_R']
 
 parameters:
     processors:
@@ -35,3 +35,4 @@ parameters:
             figsize: 8
             alpha: 0.1
             point_size: 5
+        Weighted_R: {}

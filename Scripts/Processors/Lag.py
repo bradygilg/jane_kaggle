@@ -44,12 +44,12 @@ def main():
     input_df = input_df.fillna(0)
 
    # Add one time lag as features
-    input_df = input_df.sort_values(['symbol_id','date_id','time_id']).reset_index(drop=True)
+    input_df = input_df.sort_values(['symbol_id','date_id','time_id']).reset_index(drop=True).head(1_000_000)
     lag_df = input_df.copy()
     nan_row = (lag_df.iloc[:1,:]=='fjdlsa').replace(False,0).reset_index(drop=True)
     lag_df = lag_df.iloc[:-1,:].reset_index(drop=True)
     lag_df = pd.concat([nan_row,lag_df],axis=0)
-    lag_df.columns = [c+'_lag' for c in lag_df.columns]
+    lag_df.columns = [c+'_lag_1' for c in lag_df.columns]
     input_df = pd.concat([input_df.reset_index(drop=True),lag_df.reset_index(drop=True)],axis=1)
     
     # Add multiindex column structure

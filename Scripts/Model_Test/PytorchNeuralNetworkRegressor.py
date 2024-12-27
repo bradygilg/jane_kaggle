@@ -40,7 +40,7 @@ def main():
         model.load(model_path)
         pred = model.predict(test_df)
         input_df.loc[(input_df[('Meta','Fold')]==fold),('Predictions', 'Prediction')] = pred
-    input_df = input_df[['Key','Predictions','Label']]
+    input_df = input_df[['Key','Predictions','Meta','Label']]
     input_df.to_parquet(args.output)
 
 if __name__ == '__main__':
