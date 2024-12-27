@@ -10,6 +10,7 @@ Data/.gitignore
 Data/Processed/Predictions/Regressionalize/.gitignore
 Figures/Regressionalize/LinearRegressor/Scatter/scatter.png
 Figures/Regressionalize/PytorchNeuralNetworkRegressor/Scatter/scatter.png
+Models/Regressionalize/.gitignore
 Notebooks/exploration.ipynb
 Pipeline_Yamls/dvc.lock
 Pipeline_Yamls/dvc.yaml
