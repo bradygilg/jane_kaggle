@@ -11,16 +11,19 @@ stages:
     preprocess_dataframe:
         matrix:
             processor: ${pipeline.processor_list}
+            fold: ['train','test']
         cmd: python ${root}/Scripts/Processors/${item.processor}.py 
              --input ${root}/Data/Raw/ 
-             --output ${root}/Data/Processed/${project_name}/${item.processor}.parquet
+             --fold ${item.fold}
+             --output ${root}/Data/Processed/${project_name}/${item.processor}_${item.fold}.parquet
         deps:
             - ${root}/Scripts/Processors/${item.processor}.py
             - ${root}/Data/Raw/
         outs:
-            - ${root}/Data/Processed/${project_name}/${item.processor}.parquet
+            - ${root}/Data/Processed/${project_name}/${item.processor}_${item.fold}.parquet
         params:
-            - parameters.processors.global
+            - parameters.processors.global.${item.fold}_partition_ids
+            - parameters.processors.global.label_column
             - parameters.processors.${item.processor}
 
     # Train a model for each fold and save them in the output directory
@@ -29,11 +32,11 @@ stages:
             processor: ${pipeline.processor_list}
             model: ${pipeline.model_list}
         cmd: python ${root}/Scripts/Model_Train/${item.model}.py 
-             --input ${root}/Data/Processed/${project_name}/${item.processor}.parquet 
+             --input ${root}/Data/Processed/${project_name}/${item.processor}_train.parquet
              --output ${root}/Models/${project_name}/${item.processor}/${item.model}
         deps:
             - ${root}/Scripts/Model_Train/${item.model}.py
-            - ${root}/Data/Processed/${project_name}/${item.processor}.parquet 
+            - ${root}/Data/Processed/${project_name}/${item.processor}_train.parquet
         outs:
             - ${root}/Models/${project_name}/${item.processor}/${item.model}
         params:
@@ -46,12 +49,12 @@ stages:
             model: ${pipeline.model_list}
         cmd: python ${root}/Scripts/Model_Test/${item.model}.py 
              --model ${root}/Models/${project_name}/${item.processor}/${item.model}
-             --input ${root}/Data/Processed/${project_name}/${item.processor}.parquet 
+             --input ${root}/Data/Processed/${project_name}/${item.processor}_test.parquet
              --output ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}.parquet
         deps:
             - ${root}/Scripts/Model_Test/${item.model}.py 
             - ${root}/Models/${project_name}/${item.processor}/${item.model}
-            - ${root}/Data/Processed/${project_name}/${item.processor}.parquet
+            - ${root}/Data/Processed/${project_name}/${item.processor}_test.parquet
         outs:
             - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}.parquet
         

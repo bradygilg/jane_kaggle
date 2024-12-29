@@ -33,13 +33,11 @@ def main():
     makedirs(path.dirname(args.output), exist_ok=True)
 
     # Test models on each fold
-    for fold in tqdm(sorted(list(set(input_df[('Meta','Fold')])))):
-        test_df = input_df[(input_df[('Meta','Fold')]==fold)]
-        model = LinearRegressor()
-        model_path = path.join(args.model,f'LinearRegressor_Fold{fold}')
-        model.load(model_path)
-        pred = model.predict(test_df)
-        input_df.loc[(input_df[('Meta','Fold')]==fold),('Predictions', 'Prediction')] = pred
+    model = LinearRegressor()
+    model_path = path.join(args.model,f'LinearRegressor')
+    model.load(model_path)
+    pred = model.predict(input_df)
+    input_df[('Predictions', 'Prediction')] = pred
     input_df = input_df[['Key','Predictions','Meta','Label']]
     input_df.to_parquet(args.output)
 

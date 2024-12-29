@@ -39,22 +39,19 @@ def main():
     makedirs(args.output, exist_ok=True)
 
     # Train models for each fold
-    for fold in tqdm(sorted(list(set(input_df[('Meta','Fold')])))):
-        train_df = input_df[~(input_df[('Meta','Fold')]==fold)]
-        test_df = input_df[(input_df[('Meta','Fold')]==fold)]
-        model = PytorchNeuralNetworkRegressor()
-        model.train(train_df,
-                    test_df=test_df,
-                    dimension=dimension,
-                    learning_rate=learning_rate,
-                    dropout_rate=dropout_rate,
-                    loss_function_name=loss_function_name,
-                    optimizer_name=optimizer_name,
-                    max_epochs=max_epochs,
-                    seed=seed,
-                    callback_period=callback_period)
-        out_path = path.join(args.output,f'PytorchNeuralNetworkRegressor_Fold{fold}')
-        model.save(out_path)
+    model = PytorchNeuralNetworkRegressor()
+    model.train(input_df,
+                test_df=None,
+                dimension=dimension,
+                learning_rate=learning_rate,
+                dropout_rate=dropout_rate,
+                loss_function_name=loss_function_name,
+                optimizer_name=optimizer_name,
+                max_epochs=max_epochs,
+                seed=seed,
+                callback_period=callback_period)
+    out_path = path.join(args.output,f'PytorchNeuralNetworkRegressor')
+    model.save(out_path)
 
 if __name__ == '__main__':
     main()

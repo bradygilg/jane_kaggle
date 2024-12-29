@@ -31,12 +31,10 @@ def main():
     makedirs(args.output, exist_ok=True)
 
     # Train models for each fold
-    for fold in tqdm(sorted(list(set(input_df[('Meta','Fold')])))):
-        train_df = input_df[~(input_df[('Meta','Fold')]==fold)]
-        model = LinearRegressor()
-        model.train(train_df)
-        out_path = path.join(args.output,f'LinearRegressor_Fold{fold}')
-        model.save(out_path)
+    model = LinearRegressor()
+    model.train(input_df)
+    out_path = path.join(args.output,f'LinearRegressor')
+    model.save(out_path)
 
 if __name__ == '__main__':
     main()

@@ -12,10 +12,11 @@ pipeline:
 parameters:
     processors:
         global:
+            train_partition_ids: [3]
+            test_partition_ids: [8]
+            label_column: 'responder_6'
             fold_column: 'date_id'
             num_folds: 5
-            partition_ids: [0]
-            label_column: 'responder_6'
         Regressionalize: {}
         Lag: {}
     models:

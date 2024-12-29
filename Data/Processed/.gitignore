@@ -1,2 +1,6 @@
 /Lag.parquet
 /Regressionalize.parquet
+/Regressionalize_train.parquet
+/Regressionalize_test.parquet
+/Lag_train.parquet
+/Lag_test.parquet

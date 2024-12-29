@@ -14,6 +14,12 @@ def main():
         required=True
     )
     parser.add_argument(
+        '--fold',
+        dest='fold',
+        help='train or test',
+        required=True
+    )
+    parser.add_argument(
         '--output',
         dest='output',
         help='Filepath where output parquet will be saved.',
@@ -25,10 +31,10 @@ def main():
     params = load_yaml('params.yaml')
     global_params = params['parameters']['processors']['global']
     function_params = params['parameters']['processors']['Regressionalize']
+    partition_ids = global_params[args.fold + '_partition_ids']
+    label_column = global_params['label_column']
     fold_column = global_params['fold_column']
     num_folds = global_params['num_folds']
-    partition_ids = global_params['partition_ids']
-    label_column = global_params['label_column']
 
     # Load input
     input_df = []
