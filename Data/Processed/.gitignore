@@ -7,3 +7,6 @@
 /Diff_test.parquet
 /Diff_train.parquet
 /Feature_Properties.parquet
+/Select_Feature_Parameters.parquet
+/Custom_Transform_train.parquet
+/Custom_Transform_test.parquet
