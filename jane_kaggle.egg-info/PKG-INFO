@@ -20,6 +20,7 @@ Requires-Dist: pyarrow
 Requires-Dist: matplotlib
 Requires-Dist: gilg_utils[all]@ git+https://github.com/bradygilg/gilg_utilities.git@1.0.0
 Requires-Dist: statsmodels
+Requires-Dist: polars
 
 # jane_kaggle
 A simple DVC structure for [Jane Street's "Real Time Market Data Forcecasting" Kaggle competition](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting). The project's goal is to predict the "responder_6" label on unseen samples. This repo serves as the main project page, while some generic utility functions are available in [gilg_utilities](https://github.com/bradygilg/gilg_utilities).

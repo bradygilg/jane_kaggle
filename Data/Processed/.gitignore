@@ -4,3 +4,6 @@
 /Regressionalize_test.parquet
 /Lag_train.parquet
 /Lag_test.parquet
+/Diff_test.parquet
+/Diff_train.parquet
+/Feature_Properties.parquet

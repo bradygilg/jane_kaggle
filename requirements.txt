@@ -457,6 +457,8 @@ platformdirs==3.11.0
     #   jupyter-core
 pluggy==1.5.0
     # via pytest
+polars==1.18.0
+    # via jane_kaggle (pyproject.toml)
 pretty-errors==1.2.25
     # via jane_kaggle (pyproject.toml)
 prometheus-client==0.21.0

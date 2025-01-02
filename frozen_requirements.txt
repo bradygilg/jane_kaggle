@@ -142,6 +142,7 @@ pillow==11.0.0
 pip-tools==7.4.1
 platformdirs==3.11.0
 pluggy==1.5.0
+polars==1.18.0
 pretty-errors==1.2.25
 prometheus_client==0.21.0
 prompt_toolkit==3.0.48

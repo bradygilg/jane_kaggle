@@ -48,7 +48,8 @@ def main():
     keep_mask = input_df.isna().sum()<len(input_df)
     input_df = input_df.loc[:,keep_mask]
     input_df = input_df.fillna(0)
-                                          
+    input_df = input_df.sort_values(['symbol_id','date_id','time_id']).reset_index(drop=True).head(1_000_000)
+    
     # Add multiindex column structure
     column_categories = []
     for c in input_df.columns:

@@ -26,6 +26,17 @@ stages:
             - parameters.processors.global.label_column
             - parameters.processors.${item.processor}
 
+    # Describe features
+    feature_properties:
+        cmd: python ${root}/Scripts/Processors/Feature_Properties.py 
+             --input ${root}/Data/Processed/${project_name}/Regressionalize_train.parquet
+             --output ${root}/Data/Processed/${project_name}/Feature_Properties.parquet
+        deps:
+            - ${root}/Scripts/Processors/Feature_Properties.py 
+            - ${root}/Data/Processed/${project_name}/Regressionalize_train.parquet
+        outs:
+            - ${root}/Data/Processed/${project_name}/Feature_Properties.parquet
+
     # Train a model for each fold and save them in the output directory
     train:
         matrix:
@@ -72,6 +83,40 @@ stages:
             - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}.parquet
         plots:
             - ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}:
+                cache: False
+        params:
+            - parameters.metrics.${item.metric}
+
+    # Test a diff model based on the problem parameters
+    test_forward:
+        matrix:
+            processor: ['Diff']
+            model: ${pipeline.model_list}
+        cmd: python ${root}/Scripts/Model_Test/${item.model}_forward.py 
+             --model ${root}/Models/${project_name}/${item.processor}/${item.model}
+             --input ${root}/Data/Processed/${project_name}/Regressionalize_test.parquet
+             --output ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
+        deps:
+            - ${root}/Scripts/Model_Test/${item.model}_forward.py 
+            - ${root}/Models/${project_name}/${item.processor}/${item.model}
+            - ${root}/Data/Processed/${project_name}/Regressionalize_test.parquet
+        outs:
+            - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
+        
+    # Figures for the forward test
+    metrics_forward:
+        matrix:
+            processor: ['Diff']
+            model: ${pipeline.model_list}
+            metric: ${pipeline.metric_list}
+        cmd: python ${root}/Scripts/Metrics/${item.metric}.py 
+             --input ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
+             --output ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}_forward
+        deps:
+            - ${root}/Scripts/Metrics/${item.metric}.py 
+            - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
+        plots:
+            - ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}_forward:
                 cache: False
         params:
             - parameters.metrics.${item.metric}
