@@ -1178,3 +1178,249 @@ stages:
       md5: b59c79b2460a6cca026b5168bd821899.dir
       size: 49
       nfiles: 1
+  preprocess_dataframe@Custom_Transform_Three_Diffs-train:
+    cmd: python ../Scripts/Processors/Custom_Transform_Three_Diffs.py --input ../Data/Raw/
+      --fold train --output ../Data/Processed/./Custom_Transform_Three_Diffs_train.parquet
+    deps:
+    - path: ../Data/Raw/
+      hash: md5
+      md5: 97fe5554c3c4771ea5118c1824dd143b.dir
+      size: 12299793517
+      nfiles: 26
+    - path: ../Scripts/Processors/Custom_Transform_Three_Diffs.py
+      hash: md5
+      md5: 5d6365392a2e1ff599ade2d15e0b14ba
+      size: 2567
+    params:
+      params.yaml:
+        parameters.processors.Custom_Transform_Three_Diffs: {}
+        parameters.processors.global.label_column: responder_6
+        parameters.processors.global.train_partition_ids:
+        - 3
+    outs:
+    - path: ../Data/Processed/./Custom_Transform_Three_Diffs_train.parquet
+      hash: md5
+      md5: 2bd956facefa0a960c6e57482a537a9e
+      size: 1326441986
+  preprocess_dataframe@Custom_Transform_Three_Diffs-test:
+    cmd: python ../Scripts/Processors/Custom_Transform_Three_Diffs.py --input ../Data/Raw/
+      --fold test --output ../Data/Processed/./Custom_Transform_Three_Diffs_test.parquet
+    deps:
+    - path: ../Data/Raw/
+      hash: md5
+      md5: 97fe5554c3c4771ea5118c1824dd143b.dir
+      size: 12299793517
+      nfiles: 26
+    - path: ../Scripts/Processors/Custom_Transform_Three_Diffs.py
+      hash: md5
+      md5: 5d6365392a2e1ff599ade2d15e0b14ba
+      size: 2567
+    params:
+      params.yaml:
+        parameters.processors.Custom_Transform_Three_Diffs: {}
+        parameters.processors.global.label_column: responder_6
+        parameters.processors.global.test_partition_ids:
+        - 8
+    outs:
+    - path: ../Data/Processed/./Custom_Transform_Three_Diffs_test.parquet
+      hash: md5
+      md5: 05adfcf227fecdb29716590ce9bf527d
+      size: 1332760218
+  train@Custom_Transform_Three_Diffs-LinearRegressor:
+    cmd: python ../Scripts/Model_Train/LinearRegressor.py --input ../Data/Processed/./Custom_Transform_Three_Diffs_train.parquet
+      --output ../Models/./Custom_Transform_Three_Diffs/LinearRegressor
+    deps:
+    - path: ../Data/Processed/./Custom_Transform_Three_Diffs_train.parquet
+      hash: md5
+      md5: 2bd956facefa0a960c6e57482a537a9e
+      size: 1326441986
+    - path: ../Scripts/Model_Train/LinearRegressor.py
+      hash: md5
+      md5: ed0cefc0da1f1ceb0defe9191a1830cb
+      size: 1008
+    params:
+      params.yaml:
+        parameters.models.LinearRegressor: {}
+    outs:
+    - path: ../Models/./Custom_Transform_Three_Diffs/LinearRegressor
+      hash: md5
+      md5: f0cf000306e6d63fc460385796dfe7a8.dir
+      size: 14258431
+      nfiles: 3
+  train@Custom_Transform_Three_Diffs-PytorchNeuralNetworkRegressor:
+    cmd: python ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py --input ../Data/Processed/./Custom_Transform_Three_Diffs_train.parquet
+      --output ../Models/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor
+    deps:
+    - path: ../Data/Processed/./Custom_Transform_Three_Diffs_train.parquet
+      hash: md5
+      md5: 2bd956facefa0a960c6e57482a537a9e
+      size: 1326441986
+    - path: ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py
+      hash: md5
+      md5: c35a59bbd7a41007c2b44e76257cf194
+      size: 1842
+    params:
+      params.yaml:
+        parameters.models.PytorchNeuralNetworkRegressor:
+          dimension: 16
+          learning_rate: 0.03
+          dropout_rate: 0.1
+          loss_function_name: MSELoss
+          optimizer_name: SGD
+          max_epochs: 1000
+          seed: 363
+          callback_period: 5
+    outs:
+    - path: ../Models/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor
+      hash: md5
+      md5: d45da65912a3d5ce89872e24a321a9a4.dir
+      size: 14281810
+      nfiles: 4
+  test@Custom_Transform_Three_Diffs-LinearRegressor:
+    cmd: python ../Scripts/Model_Test/LinearRegressor.py --model ../Models/./Custom_Transform_Three_Diffs/LinearRegressor
+      --input ../Data/Processed/./Custom_Transform_Three_Diffs_test.parquet --output
+      ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/LinearRegressor.parquet
+    deps:
+    - path: ../Data/Processed/./Custom_Transform_Three_Diffs_test.parquet
+      hash: md5
+      md5: 05adfcf227fecdb29716590ce9bf527d
+      size: 1332760218
+    - path: ../Models/./Custom_Transform_Three_Diffs/LinearRegressor
+      hash: md5
+      md5: f0cf000306e6d63fc460385796dfe7a8.dir
+      size: 14258431
+      nfiles: 3
+    - path: ../Scripts/Model_Test/LinearRegressor.py
+      hash: md5
+      md5: 2d8403ea55cac82a08ad82c1a2ce720c
+      size: 1179
+    outs:
+    - path: 
+        ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/LinearRegressor.parquet
+      hash: md5
+      md5: 40efcb416ab67c940659177c152ecd57
+      size: 56084057
+  test@Custom_Transform_Three_Diffs-PytorchNeuralNetworkRegressor:
+    cmd: python ../Scripts/Model_Test/PytorchNeuralNetworkRegressor.py --model ../Models/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor
+      --input ../Data/Processed/./Custom_Transform_Three_Diffs_test.parquet --output
+      ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor.parquet
+    deps:
+    - path: ../Data/Processed/./Custom_Transform_Three_Diffs_test.parquet
+      hash: md5
+      md5: 05adfcf227fecdb29716590ce9bf527d
+      size: 1332760218
+    - path: ../Models/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor
+      hash: md5
+      md5: d45da65912a3d5ce89872e24a321a9a4.dir
+      size: 14281810
+      nfiles: 4
+    - path: ../Scripts/Model_Test/PytorchNeuralNetworkRegressor.py
+      hash: md5
+      md5: 6b45f5f45bdd987fb912255bf4ef9745
+      size: 1221
+    outs:
+    - path: 
+        ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor.parquet
+      hash: md5
+      md5: b58c5c368ce62abc160986e01e3d0711
+      size: 56083753
+  metrics@Custom_Transform_Three_Diffs-LinearRegressor-Scatter:
+    cmd: python ../Scripts/Metrics/Scatter.py --input 
+      ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/LinearRegressor.parquet
+      --output ../Figures/./Custom_Transform_Three_Diffs/LinearRegressor/Scatter
+    deps:
+    - path: 
+        ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/LinearRegressor.parquet
+      hash: md5
+      md5: 40efcb416ab67c940659177c152ecd57
+      size: 56084057
+    - path: ../Scripts/Metrics/Scatter.py
+      hash: md5
+      md5: e5a619dddfe635e37853649dfdc04de3
+      size: 1794
+    params:
+      params.yaml:
+        parameters.metrics.Scatter:
+          figsize: 8
+          alpha: 0.1
+          point_size: 5
+    outs:
+    - path: ../Figures/./Custom_Transform_Three_Diffs/LinearRegressor/Scatter
+      hash: md5
+      md5: b8a2c86f494ea5599b841d4f44f0e28b.dir
+      size: 75736
+      nfiles: 1
+  metrics@Custom_Transform_Three_Diffs-LinearRegressor-Weighted_R:
+    cmd: python ../Scripts/Metrics/Weighted_R.py --input 
+      ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/LinearRegressor.parquet
+      --output ../Figures/./Custom_Transform_Three_Diffs/LinearRegressor/Weighted_R
+    deps:
+    - path: 
+        ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/LinearRegressor.parquet
+      hash: md5
+      md5: 40efcb416ab67c940659177c152ecd57
+      size: 56084057
+    - path: ../Scripts/Metrics/Weighted_R.py
+      hash: md5
+      md5: 64bf084f276aa354f20d0ee2ef05e6cc
+      size: 1483
+    params:
+      params.yaml:
+        parameters.metrics.Weighted_R: {}
+    outs:
+    - path: ../Figures/./Custom_Transform_Three_Diffs/LinearRegressor/Weighted_R
+      hash: md5
+      md5: adf1d395ae0ce7b2ffc96f2d8bcc403d.dir
+      size: 49
+      nfiles: 1
+  metrics@Custom_Transform_Three_Diffs-PytorchNeuralNetworkRegressor-Scatter:
+    cmd: python ../Scripts/Metrics/Scatter.py --input 
+      ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor.parquet
+      --output ../Figures/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor/Scatter
+    deps:
+    - path: 
+        ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor.parquet
+      hash: md5
+      md5: b58c5c368ce62abc160986e01e3d0711
+      size: 56083753
+    - path: ../Scripts/Metrics/Scatter.py
+      hash: md5
+      md5: e5a619dddfe635e37853649dfdc04de3
+      size: 1794
+    params:
+      params.yaml:
+        parameters.metrics.Scatter:
+          figsize: 8
+          alpha: 0.1
+          point_size: 5
+    outs:
+    - path: ../Figures/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor/Scatter
+      hash: md5
+      md5: 76caf81253c54796064aa9e144172bf7.dir
+      size: 83604
+      nfiles: 1
+  metrics@Custom_Transform_Three_Diffs-PytorchNeuralNetworkRegressor-Weighted_R:
+    cmd: python ../Scripts/Metrics/Weighted_R.py --input 
+      ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor.parquet
+      --output 
+      ../Figures/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor/Weighted_R
+    deps:
+    - path: 
+        ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor.parquet
+      hash: md5
+      md5: b58c5c368ce62abc160986e01e3d0711
+      size: 56083753
+    - path: ../Scripts/Metrics/Weighted_R.py
+      hash: md5
+      md5: 64bf084f276aa354f20d0ee2ef05e6cc
+      size: 1483
+    params:
+      params.yaml:
+        parameters.metrics.Weighted_R: {}
+    outs:
+    - path: 
+        ../Figures/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor/Weighted_R
+      hash: md5
+      md5: 14ff4f264f13482a4bc0e6a22b9c6417.dir
+      size: 49
+      nfiles: 1

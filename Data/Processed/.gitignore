@@ -10,3 +10,5 @@
 /Select_Feature_Parameters.parquet
 /Custom_Transform_train.parquet
 /Custom_Transform_test.parquet
+/Custom_Transform_Three_Diffs_train.parquet
+/Custom_Transform_Three_Diffs_test.parquet
