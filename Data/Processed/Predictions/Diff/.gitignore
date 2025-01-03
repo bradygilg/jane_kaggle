@@ -2,3 +2,6 @@
 /PytorchNeuralNetworkRegressor.parquet
 /LinearRegressor_forward.parquet
 /PytorchNeuralNetworkRegressor_forward.parquet
+/secondary_LinearRegressor.parquet
+/secondary_PytorchNeuralNetworkRegressor.parquet
+/PytorchNeuralNetworkRegressor_secondary_forward.parquet

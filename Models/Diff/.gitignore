@@ -1,2 +1,4 @@
 /LinearRegressor
 /PytorchNeuralNetworkRegressor
+/secondary_LinearRegressor
+/secondary_PytorchNeuralNetworkRegressor
