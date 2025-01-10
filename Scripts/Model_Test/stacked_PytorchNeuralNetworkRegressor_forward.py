@@ -32,7 +32,6 @@ def main():
     # Load input
     input_df = pd.read_parquet(args.input)
     # input_df = input_df[input_df[('Key','date_id')].isin([1360, 1361, 1362, 1363, 1364, 1365])]
-    # print(sorted(list(set(input_df[('Key','date_id')]))))
     makedirs(path.dirname(args.output), exist_ok=True)
     
     # Load Model

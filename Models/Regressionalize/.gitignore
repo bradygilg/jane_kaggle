@@ -2,3 +2,6 @@
 /LinearRegressor
 /secondary_PytorchNeuralNetworkRegressor
 /stacked_PytorchNeuralNetworkRegressor
+/stacked_LinearRegressor
+/LinearRegressor_Diff
+/PytorchNeuralNetworkRegressor_Diff

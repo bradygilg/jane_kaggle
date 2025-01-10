@@ -6,7 +6,6 @@ from gilg_utils.general import load_yaml
 from gilg_utils.models import LinearRegressor
 from gilg_utils.jane_models import StackedModel, DiffModel
 
-
 def main():
     parser = ArgumentParser()
     parser.add_argument(

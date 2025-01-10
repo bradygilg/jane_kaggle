@@ -37,12 +37,12 @@ def main():
     # Load parameters
     params = load_yaml('params.yaml')
     function_params = params['parameters']['models']['PytorchNeuralNetworkRegressor']
-    dimension = function_params['dimension']
+    dimension = 4
     learning_rate = function_params['learning_rate']
     dropout_rate = function_params['dropout_rate']
     loss_function_name = function_params['loss_function_name']
     optimizer_name = function_params['optimizer_name']
-    max_epochs = function_params['max_epochs']
+    max_epochs = 200
     seed = function_params['seed']
     callback_period = function_params['callback_period']
     
