@@ -1,2 +1,4 @@
 /LinearRegressor.parquet
 /PytorchNeuralNetworkRegressor.parquet
+/PytorchNeuralNetworkRegressor_stacked_forward.parquet
+/LinearRegressor_stacked_forward.parquet

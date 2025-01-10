@@ -34,8 +34,7 @@ def main():
 
     # Test models on each fold
     model = PytorchNeuralNetworkRegressor()
-    model_path = path.join(args.model,f'PytorchNeuralNetworkRegressor')
-    model.load(model_path)
+    model.load(args.model)
     pred = model.predict(input_df)
     input_df[('Predictions', 'Prediction')] = pred
     input_df = input_df[['Key','Predictions','Meta','Label']]

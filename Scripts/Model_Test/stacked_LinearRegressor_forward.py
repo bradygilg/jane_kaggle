@@ -4,8 +4,9 @@ import pandas as pd
 from tqdm import tqdm
 from gilg_utils.general import load_yaml
 from gilg_utils.models import LinearRegressor
-
-
+from gilg_utils.jane_models import StackedModel
+import polars as pl
+    
 def main():
     parser = ArgumentParser()
     parser.add_argument(
@@ -30,15 +31,22 @@ def main():
 
     # Load input
     input_df = pd.read_parquet(args.input)
+    # input_df = input_df[input_df[('Key','date_id')].isin([1360, 1361, 1362, 1363, 1364, 1365])]
+    # print(sorted(list(set(input_df[('Key','date_id')]))))
     makedirs(path.dirname(args.output), exist_ok=True)
+    
+    # Load Model
+    model = StackedModel(label_column='responder_6',
+                         regressive_model_list=[],
+                         diff_model_list=[],
+                         n_time_lags=2,
+                         model_class=LinearRegressor)
+    model_path = args.model
+    model.load(model_path)
 
-    # Test models on each fold
-    model = LinearRegressor()
-    model.load(args.model)
-    pred = model.predict(input_df)
-    input_df[('Predictions', 'Prediction')] = pred
-    input_df = input_df[['Key','Predictions','Meta','Label']]
-    input_df.to_parquet(args.output)
+    # Make forward model
+    predictions = model.predict(input_df)
+    predictions.to_parquet(args.output)
 
 if __name__ == '__main__':
     main()

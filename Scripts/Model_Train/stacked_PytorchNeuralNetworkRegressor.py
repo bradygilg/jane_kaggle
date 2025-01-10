@@ -4,14 +4,26 @@ import pandas as pd
 from tqdm import tqdm
 from gilg_utils.general import load_yaml
 from gilg_utils.models import PytorchNeuralNetworkRegressor
-
+from gilg_utils.jane_models import StackedModel, DiffModel 
 
 def main():
     parser = ArgumentParser()
     parser.add_argument(
         '--input',
         dest='input',
-        help='Filepath to input parquet.',
+        help='Filepath to data input parquet.',
+        required=True
+    )
+    parser.add_argument(
+        '--regression-model',
+        dest='reg',
+        help='Filepath to regression model folder.',
+        required=True
+    )
+    parser.add_argument(
+        '--diff-model',
+        dest='diff',
+        help='Filepath to diff model folder.',
         required=True
     )
     parser.add_argument(
@@ -33,13 +45,21 @@ def main():
     max_epochs = function_params['max_epochs']
     seed = function_params['seed']
     callback_period = function_params['callback_period']
-
+    
     # Load input
     input_df = pd.read_parquet(args.input)
+    regression_model = PytorchNeuralNetworkRegressor()
+    diff_model = DiffModel(label_column='responder_6',model_class=PytorchNeuralNetworkRegressor)
+    regression_model.load(args.reg)
+    diff_model.load(args.diff)
     makedirs(args.output, exist_ok=True)
 
     # Train models for each fold
-    model = PytorchNeuralNetworkRegressor()
+    model = StackedModel(label_column='responder_6',
+                         regressive_model_list=[regression_model],
+                         diff_model_list=[diff_model],
+                         n_time_lags=2,
+                         model_class=PytorchNeuralNetworkRegressor)
     model.train(input_df,
                 test_df=None,
                 dimension=dimension,

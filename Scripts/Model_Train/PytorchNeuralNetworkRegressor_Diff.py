@@ -4,20 +4,14 @@ import pandas as pd
 from tqdm import tqdm
 from gilg_utils.general import load_yaml
 from gilg_utils.models import PytorchNeuralNetworkRegressor
-
+from gilg_utils.jane_models import DiffModel
 
 def main():
     parser = ArgumentParser()
     parser.add_argument(
-        '--data-input',
-        dest='data',
-        help='Filepath to data input parquet.',
-        required=True
-    )
-    parser.add_argument(
-        '--prediction-input',
-        dest='prediction',
-        help='Filepath to predictioninput parquet.',
+        '--input',
+        dest='input',
+        help='Filepath to input parquet.',
         required=True
     )
     parser.add_argument(
@@ -41,13 +35,12 @@ def main():
     callback_period = function_params['callback_period']
 
     # Load input
-    input_df = pd.read_parquet(args.data)
-    forward_pred = pd.read_parquet(args.prediction)
-    input_df[('Data','Forward_Prediction')] = forward_pred[('Predictions','Prediction')].values
+    input_df = pd.read_parquet(args.input)
     makedirs(args.output, exist_ok=True)
 
     # Train models for each fold
-    model = PytorchNeuralNetworkRegressor()
+    model = DiffModel(label_column='responder_6',
+                      model_class=PytorchNeuralNetworkRegressor)
     model.train(input_df,
                 test_df=None,
                 dimension=dimension,
@@ -58,8 +51,7 @@ def main():
                 max_epochs=max_epochs,
                 seed=seed,
                 callback_period=callback_period)
-    out_path = path.join(args.output,f'PytorchNeuralNetworkRegressor')
-    model.save(out_path)
+    model.save(args.output)
 
 if __name__ == '__main__':
     main()

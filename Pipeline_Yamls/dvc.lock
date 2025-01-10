@@ -47,15 +47,15 @@ stages:
       size: 330737558
     - path: ../Scripts/Model_Train/LinearRegressor.py
       hash: md5
-      md5: ed0cefc0da1f1ceb0defe9191a1830cb
-      size: 1008
+      md5: 3254db6eaf5ac6f8084372bdc3855142
+      size: 954
     params:
       params.yaml:
         parameters.models.LinearRegressor: {}
     outs:
     - path: ../Models/./Regressionalize/LinearRegressor
       hash: md5
-      md5: c96e470678150acba1f132fb57001aa8.dir
+      md5: 78905f4c0789740902a373ca283fc317.dir
       size: 5002964
       nfiles: 3
   test@Regressionalize-LinearRegressor:
@@ -68,13 +68,13 @@ stages:
       size: 332010003
     - path: ../Models/./Regressionalize/LinearRegressor
       hash: md5
-      md5: c96e470678150acba1f132fb57001aa8.dir
+      md5: 78905f4c0789740902a373ca283fc317.dir
       size: 5002964
       nfiles: 3
     - path: ../Scripts/Model_Test/LinearRegressor.py
       hash: md5
-      md5: 2d8403ea55cac82a08ad82c1a2ce720c
-      size: 1179
+      md5: 4168e4c6a0346704f09a2429e943c831
+      size: 1121
     outs:
     - path: ../Data/Processed/Predictions/./Regressionalize/LinearRegressor.parquet
       hash: md5
@@ -114,8 +114,8 @@ stages:
       size: 330737558
     - path: ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: c35a59bbd7a41007c2b44e76257cf194
-      size: 1842
+      md5: 37141bb80b268431cba50e56d5ae2d40
+      size: 1774
     params:
       params.yaml:
         parameters.models.PytorchNeuralNetworkRegressor:
@@ -130,7 +130,7 @@ stages:
     outs:
     - path: ../Models/./Regressionalize/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: fa4ef56757779822198b3ac52ea8a039.dir
+      md5: 27e2e6d4b58693d9b6ba1fdf6c6c799b.dir
       size: 5012503
       nfiles: 4
   test@Regressionalize-PytorchNeuralNetworkRegressor:
@@ -144,19 +144,19 @@ stages:
       size: 332010003
     - path: ../Models/./Regressionalize/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: fa4ef56757779822198b3ac52ea8a039.dir
+      md5: 27e2e6d4b58693d9b6ba1fdf6c6c799b.dir
       size: 5012503
       nfiles: 4
     - path: ../Scripts/Model_Test/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: 6b45f5f45bdd987fb912255bf4ef9745
-      size: 1221
+      md5: f4610105ee3303b74632fdd5521ef61b
+      size: 1149
     outs:
     - path: 
         ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor.parquet
       hash: md5
-      md5: 31bf1cf0e16373fcae20b07920cff0c5
-      size: 46342289
+      md5: 0fe88b3e8c3c389d8cf04f61d043d05c
+      size: 46341124
   metrics@Regressionalize-PytorchNeuralNetworkRegressor-Scatter:
     cmd: python ../Scripts/Metrics/Scatter.py --input 
       ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor.parquet
@@ -165,8 +165,8 @@ stages:
     - path: 
         ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor.parquet
       hash: md5
-      md5: 31bf1cf0e16373fcae20b07920cff0c5
-      size: 46342289
+      md5: 0fe88b3e8c3c389d8cf04f61d043d05c
+      size: 46341124
     - path: ../Scripts/Metrics/Scatter.py
       hash: md5
       md5: e5a619dddfe635e37853649dfdc04de3
@@ -180,8 +180,8 @@ stages:
     outs:
     - path: ../Figures/./Regressionalize/PytorchNeuralNetworkRegressor/Scatter
       hash: md5
-      md5: 4ae665d6483b5827b6c64a48e93ab3a1.dir
-      size: 140183
+      md5: d6e0ed02fb87b461c9b27d44b3911929.dir
+      size: 140105
       nfiles: 1
   preprocess_dataframe@Lag:
     cmd: python ../Scripts/Processors/Lag.py --input ../Data/Raw/ --output ../Data/Processed/./Lag.parquet
@@ -219,15 +219,15 @@ stages:
       size: 785560398
     - path: ../Scripts/Model_Train/LinearRegressor.py
       hash: md5
-      md5: ed0cefc0da1f1ceb0defe9191a1830cb
-      size: 1008
+      md5: 3254db6eaf5ac6f8084372bdc3855142
+      size: 954
     params:
       params.yaml:
         parameters.models.LinearRegressor: {}
     outs:
     - path: ../Models/./Lag/LinearRegressor
       hash: md5
-      md5: e6ca799457cd97cb933d03a6307c095b.dir
+      md5: b20f7ae35a4620be58555f3ecd4b4e7e.dir
       size: 29007176
       nfiles: 3
   train@Lag-PytorchNeuralNetworkRegressor:
@@ -240,8 +240,8 @@ stages:
       size: 785560398
     - path: ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: c35a59bbd7a41007c2b44e76257cf194
-      size: 1842
+      md5: 37141bb80b268431cba50e56d5ae2d40
+      size: 1774
     params:
       params.yaml:
         parameters.models.PytorchNeuralNetworkRegressor:
@@ -256,7 +256,7 @@ stages:
     outs:
     - path: ../Models/./Lag/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: 9c9ae5cf4dc8bbf71eea2e2c905b223e.dir
+      md5: 9090af98ba67b7198f20ebf0ac8983fb.dir
       size: 29022991
       nfiles: 4
   test@Lag-LinearRegressor:
@@ -269,13 +269,13 @@ stages:
       size: 787943170
     - path: ../Models/./Lag/LinearRegressor
       hash: md5
-      md5: e6ca799457cd97cb933d03a6307c095b.dir
+      md5: b20f7ae35a4620be58555f3ecd4b4e7e.dir
       size: 29007176
       nfiles: 3
     - path: ../Scripts/Model_Test/LinearRegressor.py
       hash: md5
-      md5: 2d8403ea55cac82a08ad82c1a2ce720c
-      size: 1179
+      md5: 4168e4c6a0346704f09a2429e943c831
+      size: 1121
     outs:
     - path: ../Data/Processed/Predictions/./Lag/LinearRegressor.parquet
       hash: md5
@@ -291,13 +291,13 @@ stages:
       size: 787943170
     - path: ../Models/./Lag/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: 9c9ae5cf4dc8bbf71eea2e2c905b223e.dir
+      md5: 9090af98ba67b7198f20ebf0ac8983fb.dir
       size: 29022991
       nfiles: 4
     - path: ../Scripts/Model_Test/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: 6b45f5f45bdd987fb912255bf4ef9745
-      size: 1221
+      md5: f4610105ee3303b74632fdd5521ef61b
+      size: 1149
     outs:
     - path: ../Data/Processed/Predictions/./Lag/PytorchNeuralNetworkRegressor.parquet
       hash: md5
@@ -422,8 +422,8 @@ stages:
     - path: 
         ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor.parquet
       hash: md5
-      md5: 31bf1cf0e16373fcae20b07920cff0c5
-      size: 46342289
+      md5: 0fe88b3e8c3c389d8cf04f61d043d05c
+      size: 46341124
     - path: ../Scripts/Metrics/Weighted_R.py
       hash: md5
       md5: 64bf084f276aa354f20d0ee2ef05e6cc
@@ -434,8 +434,8 @@ stages:
     outs:
     - path: ../Figures/./Regressionalize/PytorchNeuralNetworkRegressor/Weighted_R
       hash: md5
-      md5: c86d796c61705a5fbf5a2d151607faaa.dir
-      size: 51
+      md5: 1bb6ef8ce03a356feb6e8775601532ca.dir
+      size: 53
       nfiles: 1
   preprocess_dataframe@Regressionalize-train:
     cmd: python ../Scripts/Processors/Regressionalize.py --input ../Data/Raw/ --fold
@@ -591,15 +591,15 @@ stages:
       size: 439821485
     - path: ../Scripts/Model_Train/LinearRegressor.py
       hash: md5
-      md5: ed0cefc0da1f1ceb0defe9191a1830cb
-      size: 1008
+      md5: 3254db6eaf5ac6f8084372bdc3855142
+      size: 954
     params:
       params.yaml:
         parameters.models.LinearRegressor: {}
     outs:
     - path: ../Models/./Diff/LinearRegressor
       hash: md5
-      md5: bb1a4b48cd6651375f995779da5a3344.dir
+      md5: bc38652a463439838f1c6c3b77ba7f19.dir
       size: 5003600
       nfiles: 3
   train@Diff-PytorchNeuralNetworkRegressor:
@@ -612,8 +612,8 @@ stages:
       size: 439821485
     - path: ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: c35a59bbd7a41007c2b44e76257cf194
-      size: 1842
+      md5: 37141bb80b268431cba50e56d5ae2d40
+      size: 1774
     params:
       params.yaml:
         parameters.models.PytorchNeuralNetworkRegressor:
@@ -628,7 +628,7 @@ stages:
     outs:
     - path: ../Models/./Diff/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: fa466e2fd116e830ffeea1289215ae65.dir
+      md5: 293c75b8503f8f16a440e2b2046d249e.dir
       size: 5012503
       nfiles: 4
   test@Diff-LinearRegressor:
@@ -641,13 +641,13 @@ stages:
       size: 440778907
     - path: ../Models/./Diff/LinearRegressor
       hash: md5
-      md5: bb1a4b48cd6651375f995779da5a3344.dir
+      md5: bc38652a463439838f1c6c3b77ba7f19.dir
       size: 5003600
       nfiles: 3
     - path: ../Scripts/Model_Test/LinearRegressor.py
       hash: md5
-      md5: 2d8403ea55cac82a08ad82c1a2ce720c
-      size: 1179
+      md5: 4168e4c6a0346704f09a2429e943c831
+      size: 1121
     outs:
     - path: ../Data/Processed/Predictions/./Diff/LinearRegressor.parquet
       hash: md5
@@ -663,13 +663,13 @@ stages:
       size: 440778907
     - path: ../Models/./Diff/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: fa466e2fd116e830ffeea1289215ae65.dir
+      md5: 293c75b8503f8f16a440e2b2046d249e.dir
       size: 5012503
       nfiles: 4
     - path: ../Scripts/Model_Test/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: 6b45f5f45bdd987fb912255bf4ef9745
-      size: 1221
+      md5: f4610105ee3303b74632fdd5521ef61b
+      size: 1149
     outs:
     - path: ../Data/Processed/Predictions/./Diff/PytorchNeuralNetworkRegressor.parquet
       hash: md5
@@ -998,15 +998,15 @@ stages:
       size: 370466561
     - path: ../Scripts/Model_Train/LinearRegressor.py
       hash: md5
-      md5: ed0cefc0da1f1ceb0defe9191a1830cb
-      size: 1008
+      md5: 3254db6eaf5ac6f8084372bdc3855142
+      size: 954
     params:
       params.yaml:
         parameters.models.LinearRegressor: {}
     outs:
     - path: ../Models/./Custom_Transform/LinearRegressor
       hash: md5
-      md5: 4bc673311aa487d2763ccb98eb599e30.dir
+      md5: 4078eb8857ed06f256c5414e2f022bb3.dir
       size: 14268997
       nfiles: 3
   train@Custom_Transform-PytorchNeuralNetworkRegressor:
@@ -1019,8 +1019,8 @@ stages:
       size: 370466561
     - path: ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: c35a59bbd7a41007c2b44e76257cf194
-      size: 1842
+      md5: 37141bb80b268431cba50e56d5ae2d40
+      size: 1774
     params:
       params.yaml:
         parameters.models.PytorchNeuralNetworkRegressor:
@@ -1035,7 +1035,7 @@ stages:
     outs:
     - path: ../Models/./Custom_Transform/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: d01392b3292731ac73d2537409078439.dir
+      md5: 0d2cc020bd492584e52a3401001b9957.dir
       size: 14277262
       nfiles: 4
   test@Custom_Transform-LinearRegressor:
@@ -1048,13 +1048,13 @@ stages:
       size: 371853836
     - path: ../Models/./Custom_Transform/LinearRegressor
       hash: md5
-      md5: 4bc673311aa487d2763ccb98eb599e30.dir
+      md5: 4078eb8857ed06f256c5414e2f022bb3.dir
       size: 14268997
       nfiles: 3
     - path: ../Scripts/Model_Test/LinearRegressor.py
       hash: md5
-      md5: 2d8403ea55cac82a08ad82c1a2ce720c
-      size: 1179
+      md5: 4168e4c6a0346704f09a2429e943c831
+      size: 1121
     outs:
     - path: ../Data/Processed/Predictions/./Custom_Transform/LinearRegressor.parquet
       hash: md5
@@ -1071,13 +1071,13 @@ stages:
       size: 371853836
     - path: ../Models/./Custom_Transform/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: d01392b3292731ac73d2537409078439.dir
+      md5: 0d2cc020bd492584e52a3401001b9957.dir
       size: 14277262
       nfiles: 4
     - path: ../Scripts/Model_Test/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: 6b45f5f45bdd987fb912255bf4ef9745
-      size: 1221
+      md5: f4610105ee3303b74632fdd5521ef61b
+      size: 1149
     outs:
     - path: 
         ../Data/Processed/Predictions/./Custom_Transform/PytorchNeuralNetworkRegressor.parquet
@@ -1236,15 +1236,15 @@ stages:
       size: 1326441986
     - path: ../Scripts/Model_Train/LinearRegressor.py
       hash: md5
-      md5: ed0cefc0da1f1ceb0defe9191a1830cb
-      size: 1008
+      md5: 3254db6eaf5ac6f8084372bdc3855142
+      size: 954
     params:
       params.yaml:
         parameters.models.LinearRegressor: {}
     outs:
     - path: ../Models/./Custom_Transform_Three_Diffs/LinearRegressor
       hash: md5
-      md5: f0cf000306e6d63fc460385796dfe7a8.dir
+      md5: 10497f175482ed35815688095c103d90.dir
       size: 14258431
       nfiles: 3
   train@Custom_Transform_Three_Diffs-PytorchNeuralNetworkRegressor:
@@ -1257,8 +1257,8 @@ stages:
       size: 1326441986
     - path: ../Scripts/Model_Train/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: c35a59bbd7a41007c2b44e76257cf194
-      size: 1842
+      md5: 37141bb80b268431cba50e56d5ae2d40
+      size: 1774
     params:
       params.yaml:
         parameters.models.PytorchNeuralNetworkRegressor:
@@ -1273,7 +1273,7 @@ stages:
     outs:
     - path: ../Models/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: d45da65912a3d5ce89872e24a321a9a4.dir
+      md5: 08833e8779b8e749b64b124e45adffea.dir
       size: 14281810
       nfiles: 4
   test@Custom_Transform_Three_Diffs-LinearRegressor:
@@ -1287,13 +1287,13 @@ stages:
       size: 1332760218
     - path: ../Models/./Custom_Transform_Three_Diffs/LinearRegressor
       hash: md5
-      md5: f0cf000306e6d63fc460385796dfe7a8.dir
+      md5: 10497f175482ed35815688095c103d90.dir
       size: 14258431
       nfiles: 3
     - path: ../Scripts/Model_Test/LinearRegressor.py
       hash: md5
-      md5: 2d8403ea55cac82a08ad82c1a2ce720c
-      size: 1179
+      md5: 4168e4c6a0346704f09a2429e943c831
+      size: 1121
     outs:
     - path: 
         ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/LinearRegressor.parquet
@@ -1311,13 +1311,13 @@ stages:
       size: 1332760218
     - path: ../Models/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor
       hash: md5
-      md5: d45da65912a3d5ce89872e24a321a9a4.dir
+      md5: 08833e8779b8e749b64b124e45adffea.dir
       size: 14281810
       nfiles: 4
     - path: ../Scripts/Model_Test/PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: 6b45f5f45bdd987fb912255bf4ef9745
-      size: 1221
+      md5: f4610105ee3303b74632fdd5521ef61b
+      size: 1149
     outs:
     - path: 
         ../Data/Processed/Predictions/./Custom_Transform_Three_Diffs/PytorchNeuralNetworkRegressor.parquet
@@ -1542,14 +1542,14 @@ stages:
       md5: 8f03d626a23aca6bbaef1ab963fd4711
       size: 50021957
   secondary_train@Diff-Regressionalize-LinearRegressor:
-    cmd: python ../Scripts/Model_Train/secondary_LinearRegressor.py --data-input ../Data/Processed/./Regressionalize_train.parquet
+    cmd: python ../Scripts/Model_Train/secondary_LinearRegressor.py --data-input ../Data/Processed/./Regressionalize_secondary_train.parquet
       --prediction-input ../Data/Processed/Predictions/./Diff/LinearRegressor_secondary_forward.parquet
       --output ../Models/./Diff/secondary_LinearRegressor
     deps:
-    - path: ../Data/Processed/./Regressionalize_train.parquet
+    - path: ../Data/Processed/./Regressionalize_secondary_train.parquet
       hash: md5
-      md5: 95091afe8b095fbd87b23ac6d6cd6a28
-      size: 330737558
+      md5: db9a5affa6b1ac34fed9968370514a78
+      size: 332115274
     - path: ../Data/Processed/Predictions/./Diff/LinearRegressor_secondary_forward.parquet
       hash: md5
       md5: 8f03d626a23aca6bbaef1ab963fd4711
@@ -1564,7 +1564,7 @@ stages:
     outs:
     - path: ../Models/./Diff/secondary_LinearRegressor
       hash: md5
-      md5: 1014f6c7ee7ac2ddf3197a71bcb69890.dir
+      md5: c8d824fd16577c92e5585f4c42b593ca.dir
       size: 5003638
       nfiles: 3
   secondary_test_forward@Diff-PytorchNeuralNetworkRegressor:
@@ -1594,14 +1594,14 @@ stages:
       size: 48735507
   secondary_train@Diff-Regressionalize-PytorchNeuralNetworkRegressor:
     cmd: python ../Scripts/Model_Train/secondary_PytorchNeuralNetworkRegressor.py
-      --data-input ../Data/Processed/./Regressionalize_train.parquet --prediction-input
+      --data-input ../Data/Processed/./Regressionalize_secondary_train.parquet --prediction-input
       ../Data/Processed/Predictions/./Diff/PytorchNeuralNetworkRegressor_secondary_forward.parquet
       --output ../Models/./Diff/secondary_PytorchNeuralNetworkRegressor
     deps:
-    - path: ../Data/Processed/./Regressionalize_train.parquet
+    - path: ../Data/Processed/./Regressionalize_secondary_train.parquet
       hash: md5
-      md5: 95091afe8b095fbd87b23ac6d6cd6a28
-      size: 330737558
+      md5: db9a5affa6b1ac34fed9968370514a78
+      size: 332115274
     - path: 
         ../Data/Processed/Predictions/./Diff/PytorchNeuralNetworkRegressor_secondary_forward.parquet
       hash: md5
@@ -1609,8 +1609,8 @@ stages:
       size: 48735507
     - path: ../Scripts/Model_Train/secondary_PytorchNeuralNetworkRegressor.py
       hash: md5
-      md5: 1789cc02b4aedf9b2abbd217de75f352
-      size: 2161
+      md5: af11ea06bbba159efcef4ac437261876
+      size: 2164
     params:
       params.yaml:
         parameters.models.PytorchNeuralNetworkRegressor:
@@ -1625,6 +1625,353 @@ stages:
     outs:
     - path: ../Models/./Diff/secondary_PytorchNeuralNetworkRegressor
       hash: md5
-      md5: 47ea47fc1ea4bcae84ae7a123b87f774.dir
-      size: 5012613
+      md5: b21bc7903baeddf0d9c7cb7e284d9819.dir
+      size: 5012503
       nfiles: 4
+  diff_train@Regressionalize-LinearRegressor:
+    cmd: python ../Scripts/Model_Train/LinearRegressor_Diff.py --input ../Data/Processed/./Regressionalize_train.parquet
+      --output ../Models/./Regressionalize/LinearRegressor_Diff
+    deps:
+    - path: ../Data/Processed/./Regressionalize_train.parquet
+      hash: md5
+      md5: 95091afe8b095fbd87b23ac6d6cd6a28
+      size: 330737558
+    - path: ../Scripts/Model_Train/LinearRegressor_Diff.py
+      hash: md5
+      md5: 817e4d25ca055f12cd2fff581fb3f8e3
+      size: 1069
+    params:
+      params.yaml:
+        parameters.models.LinearRegressor: {}
+    outs:
+    - path: ../Models/./Regressionalize/LinearRegressor_Diff
+      hash: md5
+      md5: 48449b2641afe9e4a8089b430c49d052.dir
+      size: 5002964
+      nfiles: 3
+  diff_train@Regressionalize-PytorchNeuralNetworkRegressor:
+    cmd: python ../Scripts/Model_Train/PytorchNeuralNetworkRegressor_Diff.py --input
+      ../Data/Processed/./Regressionalize_train.parquet --output ../Models/./Regressionalize/PytorchNeuralNetworkRegressor_Diff
+    deps:
+    - path: ../Data/Processed/./Regressionalize_train.parquet
+      hash: md5
+      md5: 95091afe8b095fbd87b23ac6d6cd6a28
+      size: 330737558
+    - path: ../Scripts/Model_Train/PytorchNeuralNetworkRegressor_Diff.py
+      hash: md5
+      md5: 8257d5a27cac593ac2b0f5369b105d06
+      size: 1889
+    params:
+      params.yaml:
+        parameters.models.PytorchNeuralNetworkRegressor:
+          dimension: 16
+          learning_rate: 0.03
+          dropout_rate: 0.1
+          loss_function_name: MSELoss
+          optimizer_name: SGD
+          max_epochs: 1000
+          seed: 363
+          callback_period: 5
+    outs:
+    - path: ../Models/./Regressionalize/PytorchNeuralNetworkRegressor_Diff
+      hash: md5
+      md5: 92441063394b2ce401f372f3a9926cf0.dir
+      size: 5012503
+      nfiles: 4
+  secondary_train@Regressionalize-LinearRegressor:
+    cmd: python ../Scripts/Model_Train/secondary_LinearRegressor.py --input ../Data/Processed/./Regressionalize_secondary_train.parquet
+      --regression-model ../Models/./Regressionalize/LinearRegressor --diff-model
+      ../Models/./Regressionalize/LinearRegressor_Diff --output ../Models/./Regressionalize/secondary_LinearRegressor
+    deps:
+    - path: ../Data/Processed/./Regressionalize_secondary_train.parquet
+      hash: md5
+      md5: db9a5affa6b1ac34fed9968370514a78
+      size: 332115274
+    - path: ../Models/./Regressionalize/LinearRegressor
+      hash: md5
+      md5: 78905f4c0789740902a373ca283fc317.dir
+      size: 5002964
+      nfiles: 3
+    - path: ../Models/./Regressionalize/LinearRegressor_Diff
+      hash: md5
+      md5: 63e947a8fc7097b52a3636ef4e4c1603.dir
+      size: 10004880
+      nfiles: 5
+    - path: ../Scripts/Model_Train/secondary_LinearRegressor.py
+      hash: md5
+      md5: a9684541ab2419fd354b209263045559
+      size: 1749
+    params:
+      params.yaml:
+        parameters.models.LinearRegressor: {}
+    outs:
+    - path: ../Models/./Regressionalize/secondary_LinearRegressor
+      hash: md5
+      md5: eca10e3e2d2afae6806635d0d70c215a.dir
+      size: 25011208
+      nfiles: 13
+  secondary_train@Regressionalize-PytorchNeuralNetworkRegressor:
+    cmd: python ../Scripts/Model_Train/secondary_PytorchNeuralNetworkRegressor.py
+      --input ../Data/Processed/./Regressionalize_secondary_train.parquet --regression-model
+      ../Models/./Regressionalize/PytorchNeuralNetworkRegressor --diff-model ../Models/./Regressionalize/PytorchNeuralNetworkRegressor_Diff
+      --output ../Models/./Regressionalize/secondary_PytorchNeuralNetworkRegressor
+    deps:
+    - path: ../Data/Processed/./Regressionalize_secondary_train.parquet
+      hash: md5
+      md5: db9a5affa6b1ac34fed9968370514a78
+      size: 332115274
+    - path: ../Models/./Regressionalize/PytorchNeuralNetworkRegressor
+      hash: md5
+      md5: 27e2e6d4b58693d9b6ba1fdf6c6c799b.dir
+      size: 5012503
+      nfiles: 4
+    - path: ../Models/./Regressionalize/PytorchNeuralNetworkRegressor_Diff
+      hash: md5
+      md5: 534facaa66b618be1304b053100b8938.dir
+      size: 10014419
+      nfiles: 6
+    - path: ../Scripts/Model_Train/secondary_PytorchNeuralNetworkRegressor.py
+      hash: md5
+      md5: 851452b3eec4b230e90ede368f96ea12
+      size: 1886
+    params:
+      params.yaml:
+        parameters.models.PytorchNeuralNetworkRegressor:
+          dimension: 16
+          learning_rate: 0.03
+          dropout_rate: 0.1
+          loss_function_name: MSELoss
+          optimizer_name: SGD
+          max_epochs: 1000
+          seed: 363
+          callback_period: 5
+    outs:
+    - path: ../Models/./Regressionalize/secondary_PytorchNeuralNetworkRegressor
+      hash: md5
+      md5: 26848049c2e0223ff6c462fc0cf561ce.dir
+      size: 25033982
+      nfiles: 16
+  stacked_train@Regressionalize-LinearRegressor:
+    cmd: python ../Scripts/Model_Train/stacked_LinearRegressor.py --input ../Data/Processed/./Regressionalize_secondary_train.parquet
+      --regression-model ../Models/./Regressionalize/LinearRegressor --diff-model
+      ../Models/./Regressionalize/LinearRegressor_Diff --output ../Models/./Regressionalize/stacked_LinearRegressor
+    deps:
+    - path: ../Data/Processed/./Regressionalize_secondary_train.parquet
+      hash: md5
+      md5: db9a5affa6b1ac34fed9968370514a78
+      size: 332115274
+    - path: ../Models/./Regressionalize/LinearRegressor
+      hash: md5
+      md5: 78905f4c0789740902a373ca283fc317.dir
+      size: 5002964
+      nfiles: 3
+    - path: ../Models/./Regressionalize/LinearRegressor_Diff
+      hash: md5
+      md5: 48449b2641afe9e4a8089b430c49d052.dir
+      size: 5002964
+      nfiles: 3
+    - path: ../Scripts/Model_Train/stacked_LinearRegressor.py
+      hash: md5
+      md5: a9684541ab2419fd354b209263045559
+      size: 1749
+    params:
+      params.yaml:
+        parameters.models.LinearRegressor: {}
+    outs:
+    - path: ../Models/./Regressionalize/stacked_LinearRegressor
+      hash: md5
+      md5: bbed958b4d076c9e7feb67f308624f91.dir
+      size: 20009292
+      nfiles: 11
+  stacked_train@Regressionalize-PytorchNeuralNetworkRegressor:
+    cmd: python ../Scripts/Model_Train/stacked_PytorchNeuralNetworkRegressor.py --input
+      ../Data/Processed/./Regressionalize_secondary_train.parquet --regression-model
+      ../Models/./Regressionalize/PytorchNeuralNetworkRegressor --diff-model ../Models/./Regressionalize/PytorchNeuralNetworkRegressor_Diff
+      --output ../Models/./Regressionalize/stacked_PytorchNeuralNetworkRegressor
+    deps:
+    - path: ../Data/Processed/./Regressionalize_secondary_train.parquet
+      hash: md5
+      md5: db9a5affa6b1ac34fed9968370514a78
+      size: 332115274
+    - path: ../Models/./Regressionalize/PytorchNeuralNetworkRegressor
+      hash: md5
+      md5: 27e2e6d4b58693d9b6ba1fdf6c6c799b.dir
+      size: 5012503
+      nfiles: 4
+    - path: ../Models/./Regressionalize/PytorchNeuralNetworkRegressor_Diff
+      hash: md5
+      md5: 92441063394b2ce401f372f3a9926cf0.dir
+      size: 5012503
+      nfiles: 4
+    - path: ../Scripts/Model_Train/stacked_PytorchNeuralNetworkRegressor.py
+      hash: md5
+      md5: 8c2e2a795b6636fa186e8ff91e9c005b
+      size: 2601
+    params:
+      params.yaml:
+        parameters.models.PytorchNeuralNetworkRegressor:
+          dimension: 16
+          learning_rate: 0.03
+          dropout_rate: 0.1
+          loss_function_name: MSELoss
+          optimizer_name: SGD
+          max_epochs: 1000
+          seed: 363
+          callback_period: 5
+    outs:
+    - path: ../Models/./Regressionalize/stacked_PytorchNeuralNetworkRegressor
+      hash: md5
+      md5: 69677102318ac8eea96bc2b8f1190852.dir
+      size: 20032066
+      nfiles: 14
+  stacked_test_forward@Regressionalize-LinearRegressor:
+    cmd: python ../Scripts/Model_Test/stacked_LinearRegressor_forward.py --model ../Models/./Regressionalize/stacked_LinearRegressor
+      --input ../Data/Processed/./Regressionalize_test.parquet --output 
+      ../Data/Processed/Predictions/./Regressionalize/LinearRegressor_stacked_forward.parquet
+    deps:
+    - path: ../Data/Processed/./Regressionalize_test.parquet
+      hash: md5
+      md5: 8e3c75502fa532c2df297f36ce115265
+      size: 332010003
+    - path: ../Models/./Regressionalize/stacked_LinearRegressor
+      hash: md5
+      md5: bbed958b4d076c9e7feb67f308624f91.dir
+      size: 20009292
+      nfiles: 11
+    - path: ../Scripts/Model_Test/stacked_LinearRegressor_forward.py
+      hash: md5
+      md5: 102c141b3060dedc8b52631d8fa446f2
+      size: 1504
+    outs:
+    - path: 
+        ../Data/Processed/Predictions/./Regressionalize/LinearRegressor_stacked_forward.parquet
+      hash: md5
+      md5: 0c74232b167ca137702425814d3cf4d1
+      size: 48124686
+  stacked_test_forward@Regressionalize-PytorchNeuralNetworkRegressor:
+    cmd: python ../Scripts/Model_Test/stacked_PytorchNeuralNetworkRegressor_forward.py
+      --model ../Models/./Regressionalize/stacked_PytorchNeuralNetworkRegressor --input
+      ../Data/Processed/./Regressionalize_test.parquet --output 
+      ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor_stacked_forward.parquet
+    deps:
+    - path: ../Data/Processed/./Regressionalize_test.parquet
+      hash: md5
+      md5: 8e3c75502fa532c2df297f36ce115265
+      size: 332010003
+    - path: ../Models/./Regressionalize/stacked_PytorchNeuralNetworkRegressor
+      hash: md5
+      md5: 69677102318ac8eea96bc2b8f1190852.dir
+      size: 20032066
+      nfiles: 14
+    - path: ../Scripts/Model_Test/stacked_PytorchNeuralNetworkRegressor_forward.py
+      hash: md5
+      md5: 675967312632a6b806ea83c4adccb0c6
+      size: 1532
+    outs:
+    - path: 
+        ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor_stacked_forward.parquet
+      hash: md5
+      md5: 155ea9fef1fe0c6a91f76d8da143e825
+      size: 48099574
+  metrics_stacked_forward@Regressionalize-LinearRegressor-Scatter:
+    cmd: python ../Scripts/Metrics/Scatter.py --input 
+      ../Data/Processed/Predictions/./Regressionalize/LinearRegressor_stacked_forward.parquet
+      --output ../Figures/./Regressionalize/LinearRegressor/Scatter_stacked_forward
+    deps:
+    - path: 
+        ../Data/Processed/Predictions/./Regressionalize/LinearRegressor_stacked_forward.parquet
+      hash: md5
+      md5: 0c74232b167ca137702425814d3cf4d1
+      size: 48124686
+    - path: ../Scripts/Metrics/Scatter.py
+      hash: md5
+      md5: e5a619dddfe635e37853649dfdc04de3
+      size: 1794
+    params:
+      params.yaml:
+        parameters.metrics.Scatter:
+          figsize: 8
+          alpha: 0.1
+          point_size: 5
+    outs:
+    - path: ../Figures/./Regressionalize/LinearRegressor/Scatter_stacked_forward
+      hash: md5
+      md5: 7e63d2d3b30d687a6dbff01140bc638a.dir
+      size: 149339
+      nfiles: 1
+  metrics_stacked_forward@Regressionalize-LinearRegressor-Weighted_R:
+    cmd: python ../Scripts/Metrics/Weighted_R.py --input 
+      ../Data/Processed/Predictions/./Regressionalize/LinearRegressor_stacked_forward.parquet
+      --output ../Figures/./Regressionalize/LinearRegressor/Weighted_R_stacked_forward
+    deps:
+    - path: 
+        ../Data/Processed/Predictions/./Regressionalize/LinearRegressor_stacked_forward.parquet
+      hash: md5
+      md5: 0c74232b167ca137702425814d3cf4d1
+      size: 48124686
+    - path: ../Scripts/Metrics/Weighted_R.py
+      hash: md5
+      md5: 64bf084f276aa354f20d0ee2ef05e6cc
+      size: 1483
+    params:
+      params.yaml:
+        parameters.metrics.Weighted_R: {}
+    outs:
+    - path: ../Figures/./Regressionalize/LinearRegressor/Weighted_R_stacked_forward
+      hash: md5
+      md5: a5668291dfb2ff7e6c2d1b8b00d3125c.dir
+      size: 71
+      nfiles: 1
+  metrics_stacked_forward@Regressionalize-PytorchNeuralNetworkRegressor-Scatter:
+    cmd: python ../Scripts/Metrics/Scatter.py --input 
+      ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor_stacked_forward.parquet
+      --output 
+      ../Figures/./Regressionalize/PytorchNeuralNetworkRegressor/Scatter_stacked_forward
+    deps:
+    - path: 
+        ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor_stacked_forward.parquet
+      hash: md5
+      md5: 155ea9fef1fe0c6a91f76d8da143e825
+      size: 48099574
+    - path: ../Scripts/Metrics/Scatter.py
+      hash: md5
+      md5: e5a619dddfe635e37853649dfdc04de3
+      size: 1794
+    params:
+      params.yaml:
+        parameters.metrics.Scatter:
+          figsize: 8
+          alpha: 0.1
+          point_size: 5
+    outs:
+    - path: 
+        ../Figures/./Regressionalize/PytorchNeuralNetworkRegressor/Scatter_stacked_forward
+      hash: md5
+      md5: 47db478c5d670f8cf15d5e2c595c1b7f.dir
+      size: 121625
+      nfiles: 1
+  metrics_stacked_forward@Regressionalize-PytorchNeuralNetworkRegressor-Weighted_R:
+    cmd: python ../Scripts/Metrics/Weighted_R.py --input 
+      ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor_stacked_forward.parquet
+      --output 
+      ../Figures/./Regressionalize/PytorchNeuralNetworkRegressor/Weighted_R_stacked_forward
+    deps:
+    - path: 
+        ../Data/Processed/Predictions/./Regressionalize/PytorchNeuralNetworkRegressor_stacked_forward.parquet
+      hash: md5
+      md5: 155ea9fef1fe0c6a91f76d8da143e825
+      size: 48099574
+    - path: ../Scripts/Metrics/Weighted_R.py
+      hash: md5
+      md5: 64bf084f276aa354f20d0ee2ef05e6cc
+      size: 1483
+    params:
+      params.yaml:
+        parameters.metrics.Weighted_R: {}
+    outs:
+    - path: 
+        ../Figures/./Regressionalize/PytorchNeuralNetworkRegressor/Weighted_R_stacked_forward
+      hash: md5
+      md5: 1c0ba40bf63aacd2ec684027c8bb529f.dir
+      size: 71
+      nfiles: 1

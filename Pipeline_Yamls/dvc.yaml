@@ -61,6 +61,22 @@ stages:
             - ${root}/Models/${project_name}/${item.processor}/${item.model}
         params:
             - parameters.models.${item.model}
+
+    # Train a model for each fold and save them in the output directory
+    diff_train:
+        matrix:
+            processor: ['Regressionalize']
+            model: ${pipeline.model_list}
+        cmd: python ${root}/Scripts/Model_Train/${item.model}_Diff.py 
+             --input ${root}/Data/Processed/${project_name}/${item.processor}_train.parquet
+             --output ${root}/Models/${project_name}/${item.processor}/${item.model}_Diff
+        deps:
+            - ${root}/Scripts/Model_Train/${item.model}_Diff.py
+            - ${root}/Data/Processed/${project_name}/${item.processor}_train.parquet
+        outs:
+            - ${root}/Models/${project_name}/${item.processor}/${item.model}_Diff
+        params:
+            - parameters.models.${item.model}
             
     # Save the predicted outputs on each fold.
     test:
@@ -96,71 +112,106 @@ stages:
         params:
             - parameters.metrics.${item.metric}
 
-    # Test a diff model based on the problem parameters
-    test_forward:
-        matrix:
-            processor: ['Diff']
-            model: ${pipeline.model_list}
-        cmd: python ${root}/Scripts/Model_Test/${item.model}_forward.py 
-             --model ${root}/Models/${project_name}/${item.processor}/${item.model}
-             --input ${root}/Data/Processed/${project_name}/Regressionalize_test.parquet
-             --output ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
-        deps:
-            - ${root}/Scripts/Model_Test/${item.model}_forward.py 
-            - ${root}/Models/${project_name}/${item.processor}/${item.model}
-            - ${root}/Data/Processed/${project_name}/Regressionalize_test.parquet
-        outs:
-            - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
+    # # Test a diff model based on the problem parameters
+    # test_forward:
+    #     matrix:
+    #         processor: ['Diff']
+    #         model: ${pipeline.model_list}
+    #     cmd: python ${root}/Scripts/Model_Test/${item.model}_forward.py 
+    #          --model ${root}/Models/${project_name}/${item.processor}/${item.model}
+    #          --input ${root}/Data/Processed/${project_name}/Regressionalize_test.parquet
+    #          --output ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
+    #     deps:
+    #         - ${root}/Scripts/Model_Test/${item.model}_forward.py 
+    #         - ${root}/Models/${project_name}/${item.processor}/${item.model}
+    #         - ${root}/Data/Processed/${project_name}/Regressionalize_test.parquet
+    #     outs:
+    #         - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
 
-    # Test a diff model based on the problem parameters
-    secondary_test_forward:
-        matrix:
-            processor: ['Diff']
-            model: ${pipeline.model_list}
-        cmd: python ${root}/Scripts/Model_Test/${item.model}_forward.py 
-             --model ${root}/Models/${project_name}/${item.processor}/${item.model}
-             --input ${root}/Data/Processed/${project_name}/Regressionalize_secondary_train.parquet
-             --output ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_secondary_forward.parquet
-        deps:
-            - ${root}/Scripts/Model_Test/${item.model}_forward.py 
-            - ${root}/Models/${project_name}/${item.processor}/${item.model}
-            - ${root}/Data/Processed/${project_name}/Regressionalize_secondary_train.parquet
-        outs:
-            - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_secondary_forward.parquet
+    # # Test a diff model based on the problem parameters
+    # secondary_test_forward:
+    #     matrix:
+    #         processor: ['Diff']
+    #         model: ${pipeline.model_list}
+    #     cmd: python ${root}/Scripts/Model_Test/${item.model}_forward.py 
+    #          --model ${root}/Models/${project_name}/${item.processor}/${item.model}
+    #          --input ${root}/Data/Processed/${project_name}/Regressionalize_secondary_train.parquet
+    #          --output ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_secondary_forward.parquet
+    #     deps:
+    #         - ${root}/Scripts/Model_Test/${item.model}_forward.py 
+    #         - ${root}/Models/${project_name}/${item.processor}/${item.model}
+    #         - ${root}/Data/Processed/${project_name}/Regressionalize_secondary_train.parquet
+    #     outs:
+    #         - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_secondary_forward.parquet
 
-    # Train a model for each fold and save them in the output directory
-    secondary_train:
+    # Train a model that uses the outputs of the previous models
+    stacked_train:
         matrix:
-            processor: ['Diff']
             secondary_processor: ${pipeline.secondary_processor_list}
             model: ${pipeline.model_list}
-        cmd: python ${root}/Scripts/Model_Train/secondary_${item.model}.py 
-             --data-input ${root}/Data/Processed/${project_name}/${item.secondary_processor}_train.parquet
-             --prediction-input ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_secondary_forward.parquet
-             --output ${root}/Models/${project_name}/${item.processor}/secondary_${item.model}
+        cmd: python ${root}/Scripts/Model_Train/stacked_${item.model}.py 
+             --input ${root}/Data/Processed/${project_name}/${item.secondary_processor}_secondary_train.parquet
+             --regression-model ${root}/Models/${project_name}/Regressionalize/${item.model}
+             --diff-model ${root}/Models/${project_name}/Regressionalize/${item.model}_Diff
+             --output ${root}/Models/${project_name}/${item.secondary_processor}/stacked_${item.model}
         deps:
-            - ${root}/Scripts/Model_Train/secondary_${item.model}.py 
-            - ${root}/Data/Processed/${project_name}/${item.secondary_processor}_train.parquet
-            - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_secondary_forward.parquet
+            - ${root}/Scripts/Model_Train/stacked_${item.model}.py 
+            - ${root}/Data/Processed/${project_name}/${item.secondary_processor}_secondary_train.parquet
+            - ${root}/Models/${project_name}/Regressionalize/${item.model}
+            - ${root}/Models/${project_name}/Regressionalize/${item.model}_Diff
         outs:
-            - ${root}/Models/${project_name}/${item.processor}/secondary_${item.model}
+            - ${root}/Models/${project_name}/${item.secondary_processor}/stacked_${item.model}
         params:
             - parameters.models.${item.model}
-            
-    # Figures for the forward test
-    metrics_forward:
+
+    # Test the stacked model on the test set
+    stacked_test_forward:
         matrix:
-            processor: ['Diff']
+            secondary_processor: ${pipeline.secondary_processor_list}
+            model: ${pipeline.model_list}
+        cmd: python ${root}/Scripts/Model_Test/stacked_${item.model}_forward.py 
+             --model ${root}/Models/${project_name}/${item.secondary_processor}/stacked_${item.model}
+             --input ${root}/Data/Processed/${project_name}/Regressionalize_test.parquet
+             --output ${root}/Data/Processed/Predictions/${project_name}/${item.secondary_processor}/${item.model}_stacked_forward.parquet
+        deps:
+            - ${root}/Scripts/Model_Test/stacked_${item.model}_forward.py 
+            - ${root}/Models/${project_name}/${item.secondary_processor}/stacked_${item.model}
+            - ${root}/Data/Processed/${project_name}/Regressionalize_test.parquet
+        outs:
+            - ${root}/Data/Processed/Predictions/${project_name}/${item.secondary_processor}/${item.model}_stacked_forward.parquet
+
+    # Figures for the forward test
+    metrics_stacked_forward:
+        matrix:
+            secondary_processor: ${pipeline.secondary_processor_list}
             model: ${pipeline.model_list}
             metric: ${pipeline.metric_list}
         cmd: python ${root}/Scripts/Metrics/${item.metric}.py 
-             --input ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
-             --output ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}_forward
+             --input ${root}/Data/Processed/Predictions/${project_name}/${item.secondary_processor}/${item.model}_stacked_forward.parquet
+             --output ${root}/Figures/${project_name}/${item.secondary_processor}/${item.model}/${item.metric}_stacked_forward
         deps:
             - ${root}/Scripts/Metrics/${item.metric}.py 
-            - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
+            - ${root}/Data/Processed/Predictions/${project_name}/${item.secondary_processor}/${item.model}_stacked_forward.parquet
         plots:
-            - ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}_forward:
+            - ${root}/Figures/${project_name}/${item.secondary_processor}/${item.model}/${item.metric}_stacked_forward:
                 cache: False
         params:
             - parameters.metrics.${item.metric}
+    
+    # Figures for the forward test
+    # metrics_forward:
+    #     matrix:
+    #         processor: ['Diff']
+    #         model: ${pipeline.model_list}
+    #         metric: ${pipeline.metric_list}
+    #     cmd: python ${root}/Scripts/Metrics/${item.metric}.py 
+    #          --input ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
+    #          --output ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}_forward
+    #     deps:
+    #         - ${root}/Scripts/Metrics/${item.metric}.py 
+    #         - ${root}/Data/Processed/Predictions/${project_name}/${item.processor}/${item.model}_forward.parquet
+    #     plots:
+    #         - ${root}/Figures/${project_name}/${item.processor}/${item.model}/${item.metric}_forward:
+    #             cache: False
+    #     params:
+    #         - parameters.metrics.${item.metric}
